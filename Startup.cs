@@ -28,14 +28,16 @@ namespace LloydStephanieRealty
             services.AddRazorPages();
             services.AddDbContext<MBS_DBContext>(opts =>
             {
-                opts.UseSqlServer(Configuration["ConnectionStrings:MBSConnStr"]);
+                opts.UseSqlServer(Configuration["ConnectionStrings:LuigiConnection"]);
             });
             services.AddScoped<IUserRepository, EFStoreRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MBS_DBContext context)
         {
+            context.Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
