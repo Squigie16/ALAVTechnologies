@@ -1,0 +1,36 @@
+﻿@page
+@model LloydStephanieRealty.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login Page</title>
+</head>
+<body>
+
+    <div>
+        Login
+    </div>
+    <form asp-action="LoginPage" method="post">
+        <p>
+            <label asp-for="Username">
+                UserName:
+                <input asp-for="Username" />
+            </label>
+        </p>
+        <p>
+            <label asp-for="Password">
+                Password:
+                <input asp-for="Password" />
+            </label>
+        </p>
+
+        <button type="submit">Log In</button>
+
+    </form>
+    <a asp-page="./Create">Register</a>
+</body>
+</html>

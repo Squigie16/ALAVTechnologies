@@ -34,11 +34,11 @@ namespace LloydStephanieRealty.Migrations
                     b.Property<bool>("IsMailing")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Password")
-                        .HasColumnType("int");
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Username")
-                        .HasColumnType("int");
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

@@ -34,5 +34,34 @@ namespace LloydStephanieRealty.Controllers
             smtpClient.Send("email", "recipient", "subject", "body");*/
             return View(repository.Users);
         }
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult Create(User user)
+        {
+            _dbContext.Users.AddRange(user);
+            _dbContext.SaveChanges();
+            return View("index", repository.Users);
+        }
+        [HttpGet]
+        public ViewResult LoginPage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult LoginPage(User user)
+        {
+            string pass = _dbContext.Users.Where(u => u.Username == user.Username)
+                   .Select(u => u.Password)
+                   .FirstOrDefault();
+            if (pass == user.Password)
+            {
+                return View("index", repository.Users);
+            }
+            return View();
+        }
     }
 }
