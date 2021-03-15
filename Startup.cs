@@ -28,7 +28,7 @@ namespace LloydStephanieRealty
             services.AddRazorPages();
             services.AddDbContext<MBS_DBContext>(opts =>
             {
-                opts.UseSqlServer(Configuration["ConnectionStrings:LuigiConnection"]);
+                opts.UseSqlServer(Configuration["ConnectionStrings:MBSConnStr"]);
             });
             services.AddScoped<IUserRepository, EFStoreRepository>();
         }
