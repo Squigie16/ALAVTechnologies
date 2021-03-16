@@ -63,5 +63,10 @@ namespace LloydStephanieRealty.Controllers
             }
             return View();
         }
+
+        public ViewResult SignUpMailingList()
+        {
+           return View();
+        }
     }
 }
