@@ -29,12 +29,11 @@ namespace LloydStephanieRealty.Pages
             foreach (User u in _context.Users)
             {
                 var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse("eloisa.schoen@ethereal.email"));
+                email.From.Add(MailboxAddress.Parse("brodsmithjack@gmail.com"));
                 email.To.Add(MailboxAddress.Parse(u.Email));
                 email.Subject = "Test Email Subject";
                 email.Body = new TextPart(TextFormat.Html) { Text = "<h1>WELCOME TO THE NEWSLETTER</h1>" };
 
-                // send email
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
                 smtp.Authenticate("brodsmithjack@gmail.com", "test4321");
