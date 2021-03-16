@@ -5,25 +5,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Current Mailing List</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.User[0].Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].IsAdmin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].IsMailing)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User[0].Email)
@@ -39,24 +27,14 @@
                     @Html.DisplayFor(modelItem => item.Username)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsAdmin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsMailing)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
     <a asp-page="./Mail">Mail</a>
 </table>
+
+<p>
+    <a asp-page="SignUpMailingList">Sign Up for Mailing List</a>
+</p>
