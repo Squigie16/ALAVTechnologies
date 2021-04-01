@@ -26,5 +26,32 @@ namespace LloydStephanieRealty.Models
             context.Blogs.Update(blog);
             context.SaveChanges();
         }
+
+        public void DeleteBlog(int id)
+        {
+            foreach (Comment c in context.Comments)
+            {
+                if (c.BlogID == id)
+                {
+                    context.Comments.Remove(c);
+                }
+            }
+
+            context.SaveChanges();
+
+            Blog blog = new Blog();
+            foreach(Blog b in context.Blogs)
+            {
+                if(b.ID == id)
+                {
+                    blog = b;
+                    break;
+                }
+            }
+
+            context.Blogs.Remove(blog);
+
+            context.SaveChanges();
+        }
     }
 }

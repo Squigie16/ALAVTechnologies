@@ -1,6 +1,7 @@
 ﻿@model LloydStephanieRealty.Models.Blog
 @{
     Layout = "_AdminLayout";
+    List<LloydStephanieRealty.Models.Comment> comments = ViewData["Comments"] as List<LloydStephanieRealty.Models.Comment>;
 }
 
 <h2>Edit Blog</h2>
@@ -21,3 +22,28 @@
     </div>
     <input type="submit" style="width: auto; font-weight: 600;" value="Post" /><br />
 </form>
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Comment</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in comments)
+        {
+            <tr>
+                <td>@comment.Name</td>
+                <td>@comment.Description</td>
+                <td>
+                    <form asp-action="DeleteComment" method="post">
+                        <input type="hidden" value="@comment.ID" name="CommentID" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

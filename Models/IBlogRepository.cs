@@ -10,5 +10,6 @@ namespace LloydStephanieRealty.Models
         IQueryable<Blog> Blogs { get; }
         void AddBlog(Blog blog);
         void EditBlog(Blog blog);
+        void DeleteBlog(int id);
     }
 }

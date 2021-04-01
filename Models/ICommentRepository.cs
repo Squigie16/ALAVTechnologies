@@ -9,5 +9,6 @@ namespace LloydStephanieRealty.Models
     {
         IQueryable<Comment> Comments { get; }
         void AddComment(Comment comment);
+        void DeleteComment(int id);
     }
 }

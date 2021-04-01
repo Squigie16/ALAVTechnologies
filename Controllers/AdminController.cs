@@ -10,9 +10,11 @@ namespace LloydStephanieRealty.Controllers
     public class AdminController : Controller
     {
         private IBlogRepository blogRepository;
-        public AdminController(IBlogRepository repository)
+        private ICommentRepository commentRepository;
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository)
         {
-            blogRepository = repository;
+            blogRepository = bRepository;
+            commentRepository = cRepository;
         }
 
         public IActionResult AdminIndex()
@@ -34,7 +36,6 @@ namespace LloydStephanieRealty.Controllers
         public IActionResult AddBlog(Blog blog)
         {
             blog.DateOfPost = DateTime.Now;
-           // blog.Comments = new List<Comment>();
             blogRepository.AddBlog(blog);
 
             return RedirectToAction("BlogIndex");
@@ -53,6 +54,17 @@ namespace LloydStephanieRealty.Controllers
                 }
             }
 
+            List<Comment> commentsOnPost = new List<Comment>();
+
+            foreach (Comment c in commentRepository.Comments)
+            {
+                if (c.BlogID == blog.ID)
+                {
+                    commentsOnPost.Add(c);
+                }
+            }
+
+            ViewData["Comments"] = commentsOnPost;
             return View(blog);
         }
 
@@ -60,6 +72,19 @@ namespace LloydStephanieRealty.Controllers
         public IActionResult EditBlog(Blog blog)
         {
             blogRepository.EditBlog(blog);
+            return RedirectToAction("BlogIndex");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBlog(int BlogID)
+        {
+            blogRepository.DeleteBlog(BlogID);
+            return RedirectToAction("BlogIndex");
+        }
+        [HttpPost]
+        public IActionResult DeleteComment(int CommentID)
+        {
+            commentRepository.DeleteComment(CommentID);
             return RedirectToAction("BlogIndex");
         }
     }

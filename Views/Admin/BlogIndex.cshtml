@@ -10,6 +10,7 @@
             <th>Blog Title</th>
             <th>Time Created</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,12 @@
                 <td>@blog.DateOfPost</td>
                 <td>
                     <a asp-action="EditBlog" asp-route-id="@blog.ID">Edit</a>
+                </td>
+                <td>
+                    <form asp-action="DeleteBlog" method="post">
+                        <input type="hidden" value="@blog.ID" name="BlogID" />
+                        <button type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
         }

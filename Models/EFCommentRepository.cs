@@ -21,5 +21,21 @@ namespace LloydStephanieRealty.Models
             context.Comments.Add(comment);
             context.SaveChanges();
         }
+
+        public void DeleteComment(int id)
+        {
+            Comment comment = new Comment();
+            foreach(Comment c in context.Comments)
+            {
+                if(c.ID == id)
+                {
+                    comment = c;
+                    break;
+                }
+            }
+
+            context.Comments.Remove(comment);
+            context.SaveChanges();
+        }
     }
 }

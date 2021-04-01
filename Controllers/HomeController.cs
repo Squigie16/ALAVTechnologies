@@ -90,10 +90,9 @@ namespace LloydStephanieRealty.Controllers
                 }
             }
 
-            IQueryable<Comment> comments = commentRepository.Comments;
             List<Comment> commentsOnPost = new List<Comment>();
 
-            foreach (Comment c in comments)
+            foreach (Comment c in commentRepository.Comments)
             {
                 if(c.BlogID == blog.ID)
                 {
