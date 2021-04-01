@@ -11,6 +11,6 @@ namespace LloydStephanieRealty.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateOfPost { get; set; }
-        //public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

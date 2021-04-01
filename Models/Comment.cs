@@ -10,6 +10,7 @@ namespace LloydStephanieRealty.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime DateOfComment { get; set; }
         public int BlogID { get; set; }
     }
 }

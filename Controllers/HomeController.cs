@@ -123,10 +123,7 @@ namespace LloydStephanieRealty.Controllers
                     break;
                 }
             }
-            Console.WriteLine("Comment Added");
-            Console.WriteLine("Name: " + comment.Name);
-            Console.WriteLine("Desc. : " + comment.Description);
-            Console.WriteLine("BlogID :" + comment.BlogID);
+            comment.DateOfComment = DateTime.Now;
             commentRepository.AddComment(comment);
 
             return RedirectToAction("Blog", new { @id = blog.ID });
