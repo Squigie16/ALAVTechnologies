@@ -4,14 +4,16 @@ using LloydStephanieRealty.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LloydStephanieRealty.Migrations
 {
     [DbContext(typeof(MBS_DBContext))]
-    partial class MBS_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210331225240_Second")]
+    partial class Second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +28,9 @@ namespace LloydStephanieRealty.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CommentsID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateOfPost")
                         .HasColumnType("datetime2");
 
@@ -37,6 +42,8 @@ namespace LloydStephanieRealty.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("CommentsID");
+
                     b.ToTable("Blogs");
                 });
 
@@ -47,9 +54,6 @@ namespace LloydStephanieRealty.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BlogID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -57,8 +61,6 @@ namespace LloydStephanieRealty.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("BlogID");
 
                     b.ToTable("Comments");
                 });
@@ -90,15 +92,12 @@ namespace LloydStephanieRealty.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("LloydStephanieRealty.Models.Comment", b =>
-                {
-                    b.HasOne("LloydStephanieRealty.Models.Blog", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("BlogID");
-                });
-
             modelBuilder.Entity("LloydStephanieRealty.Models.Blog", b =>
                 {
+                    b.HasOne("LloydStephanieRealty.Models.Comment", "Comments")
+                        .WithMany()
+                        .HasForeignKey("CommentsID");
+
                     b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618

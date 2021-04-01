@@ -26,11 +26,14 @@ namespace LloydStephanieRealty
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllersWithViews();
             services.AddDbContext<MBS_DBContext>(opts =>
             {
-                opts.UseSqlServer(Configuration["ConnectionStrings:MBSConnStr"]);
+                opts.UseSqlServer(Configuration["ConnectionStrings:AlecConnStr"]);
             });
             services.AddScoped<IUserRepository, EFStoreRepository>();
+            services.AddScoped<IBlogRepository, EFBlogRepository>();
+            services.AddScoped<ICommentRepository, EFCommentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +61,7 @@ namespace LloydStephanieRealty
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
         }

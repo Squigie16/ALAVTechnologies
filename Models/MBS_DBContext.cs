@@ -11,5 +11,7 @@ namespace LloydStephanieRealty.Models
             : base(options) { }
         //entity
         public DbSet<User> Users { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
+        public virtual DbSet<Comment> Comments {get; set;}
     }
 }

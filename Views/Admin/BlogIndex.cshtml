@@ -1,0 +1,29 @@
+﻿@model IQueryable<LloydStephanieRealty.Models.Blog>
+@{
+    Layout = "_AdminLayout";
+}
+<h2>Manage Blogs</h2>
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>Blog ID</th>
+            <th>Blog Title</th>
+            <th>Time Created</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.ID</td>
+                <td>@blog.Title</td>
+                <td>@blog.DateOfPost</td>
+                <td>
+                    <a asp-action="EditBlog" asp-route-id="@blog.ID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-dark" asp-controller="Admin" asp-action="AddBlog" >Add a Blog</a>

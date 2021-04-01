@@ -1,0 +1,23 @@
+﻿@model LloydStephanieRealty.Models.Blog
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2>Edit Blog</h2>
+
+<form asp-action="EditBlog" method="post" style="width:75%;" class="m-2">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Title">
+            Title
+            <input asp-for="Title" type="text" style="" class="form-control"/>
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">
+            Content
+            <textarea asp-for="Description" class="form-control" style="height: 300px;"></textarea>
+        </label>
+    </div>
+    <input type="submit" style="width: auto; font-weight: 600;" value="Post" /><br />
+</form>
