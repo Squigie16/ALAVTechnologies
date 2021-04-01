@@ -29,7 +29,7 @@ namespace LloydStephanieRealty
             services.AddControllersWithViews();
             services.AddDbContext<MBS_DBContext>(opts =>
             {
-                opts.UseSqlServer(Configuration["ConnectionStrings:AlecConnStr"]);
+                opts.UseSqlServer(Configuration["ConnectionStrings:LuigiConnection"]);
             });
             services.AddScoped<IUserRepository, EFStoreRepository>();
             services.AddScoped<IBlogRepository, EFBlogRepository>();
