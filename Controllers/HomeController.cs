@@ -14,10 +14,14 @@ namespace LloydStephanieRealty.Controllers
     {
         private IUserRepository repository;
         private MBS_DBContext _dbContext;
-        public HomeController(IUserRepository userRepository, MBS_DBContext dbContext)
+        private IBlogRepository blogRepository;
+        private ICommentRepository commentRepository;
+        public HomeController(IUserRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment)
         {
             repository = userRepository;
             _dbContext = dbContext;
+            blogRepository = blog;
+            commentRepository = comment;
         }
         public IActionResult Index()
         {
@@ -67,6 +71,62 @@ namespace LloydStephanieRealty.Controllers
         public ViewResult SignUpMailingList()
         {
            return View();
+        }
+        public IActionResult Blogs()
+        {
+            IQueryable<Blog> blogs = blogRepository.Blogs;
+            return View(blogs);
+        }
+        public IActionResult Blog(int id)
+        {
+            Blog blog = new Blog();
+            IQueryable<Blog> blogs = blogRepository.Blogs;
+            foreach (Blog b in blogs)
+            {
+                if (id == b.ID)
+                {
+                    blog = b;
+                    break;
+                }
+            }
+
+            List<Comment> commentsOnPost = new List<Comment>();
+
+            foreach (Comment c in commentRepository.Comments)
+            {
+                if(c.BlogID == blog.ID)
+                {
+                    commentsOnPost.Add(c);
+                    Console.WriteLine("CommentBlogID: " + c.BlogID);
+                }
+            }
+
+            Console.WriteLine("Number of Comments: " + commentsOnPost.Count);
+
+            ViewData["Comments"] = commentsOnPost;
+            ViewData["Blog"] = blog;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(Comment comment)
+        {
+            IQueryable<Blog> blogs = blogRepository.Blogs;
+            Blog blog = new Blog();
+
+            foreach(Blog b in blogs)
+            {
+                if(comment.BlogID == b.ID)
+                {
+                    //b.Comments.Add(comment);
+                    blog = b;
+                    break;
+                }
+            }
+            comment.DateOfComment = DateTime.Now;
+            commentRepository.AddComment(comment);
+
+            return RedirectToAction("Blog", new { @id = blog.ID });
         }
     }
 }

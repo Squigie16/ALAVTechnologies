@@ -4,14 +4,16 @@ using LloydStephanieRealty.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LloydStephanieRealty.Migrations
 {
     [DbContext(typeof(MBS_DBContext))]
-    partial class MBS_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210401040806_FixedSecond")]
+    partial class FixedSecond
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,11 +49,8 @@ namespace LloydStephanieRealty.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlogID")
+                    b.Property<int?>("BlogID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("DateOfComment")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -97,9 +96,7 @@ namespace LloydStephanieRealty.Migrations
                 {
                     b.HasOne("LloydStephanieRealty.Models.Blog", null)
                         .WithMany("Comments")
-                        .HasForeignKey("BlogID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BlogID");
                 });
 
             modelBuilder.Entity("LloydStephanieRealty.Models.Blog", b =>
