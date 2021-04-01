@@ -5,7 +5,9 @@
     Layout = "_Layout";
 }
 
-<p>@blog.DateOfPost</p><h2>@blog.Title</h2>
+<h2>@blog.Title</h2>
+
+<h6>@blog.DateOfPost.DayOfWeek, @blog.DateOfPost.ToString("MMMM") @blog.DateOfPost.Day, @blog.DateOfPost.Year</h6>
 
 <p>@blog.Description</p>
 
@@ -14,8 +16,9 @@
     <h4>Comments</h4>
     @foreach (LloydStephanieRealty.Models.Comment comment in comments)
     {
-        <p>@comment.DateOfComment</p>
+        var ts = new TimeSpan(DateTime.Now.Ticks - comment.DateOfComment.Ticks);
         <p><b>@comment.Name: </b> @comment.Description</p>
+        <p><i>@ts.Minutes minutes ago</i></p>
     }
 }
 <h4>Add A comment</h4>
@@ -24,7 +27,7 @@
     <div class="form-group">
         <label asp-for="Name">
             Name
-            <input asp-for="Name" type="text" style="" class="form-control"/>
+            <input asp-for="Name" type="text" style="" class="form-control" />
         </label>
     </div>
     <div class="form-group">
@@ -32,7 +35,7 @@
             Comment
             <textarea asp-for="Description" class="form-control" placeholder="What would you like to write?"></textarea>
         </label>
-        <input type="hidden" value="@blog.ID" name="BlogID"/>
+        <input type="hidden" value="@blog.ID" name="BlogID" />
     </div>
     <input type="submit" style="width: auto; font-weight: 600;" value="Post" /><br />
 </form>
