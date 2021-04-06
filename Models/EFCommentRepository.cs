@@ -37,5 +37,8 @@ namespace LloydStephanieRealty.Models
             context.Comments.Remove(comment);
             context.SaveChanges();
         }
+
+        //Add the comment life here for Seconds Minutes Hours Days Weeks Months and Years
+
     }
 }
