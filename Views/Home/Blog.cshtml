@@ -18,7 +18,7 @@
     {
         var ts = new TimeSpan(DateTime.Now.Ticks - comment.DateOfComment.Ticks);
         <p><b>@comment.Name: </b> @comment.Description</p>
-        <p><i>@ts.Minutes minutes ago</i></p>
+        <p><i>@ts.Hours minutes ago</i></p>
     }
 }
 <h4>Add A comment</h4>
