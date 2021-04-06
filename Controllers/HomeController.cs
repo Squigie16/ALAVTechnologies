@@ -97,11 +97,8 @@ namespace LloydStephanieRealty.Controllers
                 if(c.BlogID == blog.ID)
                 {
                     commentsOnPost.Add(c);
-                    Console.WriteLine("CommentBlogID: " + c.BlogID);
                 }
             }
-
-            Console.WriteLine("Number of Comments: " + commentsOnPost.Count);
 
             ViewData["Comments"] = commentsOnPost;
             ViewData["Blog"] = blog;
