@@ -27,13 +27,13 @@
     <div class="form-group">
         <label asp-for="Name">
             Name
-            <input asp-for="Name" type="text" style="" class="form-control" />
+            <input asp-for="Name" type="text" style="" class="form-control" required/>
         </label>
     </div>
     <div class="form-group">
         <label asp-for="Description">
             Comment
-            <textarea asp-for="Description" class="form-control" placeholder="What would you like to write?"></textarea>
+            <textarea asp-for="Description" class="form-control" placeholder="What would you like to write?" required></textarea>
         </label>
         <input type="hidden" value="@blog.ID" name="BlogID" />
     </div>
