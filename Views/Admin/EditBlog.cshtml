@@ -3,47 +3,50 @@
     Layout = "_AdminLayout";
     List<LloydStephanieRealty.Models.Comment> comments = ViewData["Comments"] as List<LloydStephanieRealty.Models.Comment>;
 }
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Edit Blog</h2>
 
-<h2>Edit Blog</h2>
+    <form asp-action="EditBlog" method="post">
+        <label for="bTitle" asp-for="Title"></label>
+        <input asp-for="Title" type="text" id="bTitle" required />
+        <br />
 
-<form asp-action="EditBlog" method="post" style="width:75%;" class="m-2">
-    <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Title">
-            Title
-            <input asp-for="Title" type="text" style="" class="form-control"/>
-        </label>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">
-            Content
-            <textarea asp-for="Description" class="form-control" style="height: 300px;"></textarea>
-        </label>
-    </div>
-    <input type="submit" style="width: auto; font-weight: 600;" value="Post" /><br />
-</form>
+        <label id="bDesc" asp-for="Description"></label>
+        <textarea asp-for="Description" id="bDesc" required></textarea><br />
+        <input type="submit" value="Post" /><br />
+    </form>
+    <br />
 
-<table class="table table-sm table-striped table-bordered m-2">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Comment</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var comment in comments)
-        {
+    <table>
+        <thead>
             <tr>
-                <td>@comment.Name</td>
-                <td>@comment.Description</td>
-                <td>
-                    <form asp-action="DeleteComment" method="post">
-                        <input type="hidden" value="@comment.ID" name="CommentID" />
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>Comment</th>
+                <th>Delete</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var comment in comments)
+            {
+                <tr>
+                    <td>@comment.Name</td>
+                    <td>@comment.Description</td>
+                    <td>
+                        <form asp-action="DeleteComment" method="post">
+                            <input type="hidden" value="@comment.ID" name="CommentID" />
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

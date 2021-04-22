@@ -2,22 +2,23 @@
 @{
     Layout = "_AdminLayout";
 }
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Create new blog post</h2>
 
-<h2>Create new blog post</h2>
+    <form asp-action="AddBlog" method="post">
+        <label for="bTitle" asp-for="Title"></label>
+        <input asp-for="Title" type="text" id="bTitle" required placeholder="The Title goes here..." />
+        <br />
 
-<form asp-action="AddBlog" method="post" style="width:75%;" class="m-2">
-    <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Title">
-            Title
-            <input asp-for="Title" type="text" style="" class="form-control" required placeholder="The Title goes here..." />
-        </label>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">
-            Content
-            <textarea asp-for="Description" class="form-control" style="height: 300px;" required placeholder="What would you like to write?"></textarea>
-        </label>
-    </div>
-    <input type="submit" style="width: auto; font-weight: 600;" value="Post" /><br />
-</form>
+        <label id="bDesc" asp-for="Description"></label>
+        <textarea asp-for="Description" id="bDesc" required placeholder="What would you like to write?"></textarea><br />
+        <input type="submit" value="Post" /><br />
+    </form>
+
+</body>
+
+</html>

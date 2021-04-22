@@ -4,41 +4,40 @@
     List<LloydStephanieRealty.Models.Comment> comments = ViewData["Comments"] as List<LloydStephanieRealty.Models.Comment>;
     Layout = "_Layout";
 }
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/ClientBlog.css" />
+</head>
+<body>
 
-<h2>@blog.Title</h2>
+    <h6>@blog.DateOfPost.DayOfWeek, @blog.DateOfPost.ToString("MMMM") @blog.DateOfPost.Day, @blog.DateOfPost.Year</h6>
 
-<h6>@blog.DateOfPost.DayOfWeek, @blog.DateOfPost.ToString("MMMM") @blog.DateOfPost.Day, @blog.DateOfPost.Year</h6>
+    <h2>@blog.Title</h2>
 
-<p>@blog.Description</p>
+    <p>@blog.Description</p>
 
-@if (comments != null)
-{
-    <h4>Comments</h4>
-    @foreach (LloydStephanieRealty.Models.Comment comment in comments)
+    @if (comments != null)
     {
-        var ts = new TimeSpan(DateTime.Now.Ticks - comment.DateOfComment.Ticks);
-        <p><b>@comment.Name: </b> @comment.Description</p>
-        <p><i>@ts.Minutes Minutes Ago</i></p>
+        <h4>Comments</h4>
+        @foreach (LloydStephanieRealty.Models.Comment comment in comments)
+        {
+            var ts = new TimeSpan(DateTime.Now.Ticks - comment.DateOfComment.Ticks);
+                <p><b>@comment.Name: </b> <i>@ts.Minutes Minutes Ago</i></p>
+                <p>@comment.Description</p>
+        }
     }
-}
-<h4>Add A comment</h4>
-<form asp-action="AddComment" method="post" style="width:75%;" class="m-2">
-    <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Name">
-            Name
-            <input asp-for="Name" type="text" style="" class="form-control" required/>
-        </label>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">
-            Comment
-            <textarea asp-for="Description" class="form-control" placeholder="What would you like to write?" required></textarea>
-        </label>
+    <h4>Add A comment</h4>
+    <form asp-action="AddComment" method="post">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" type="text" placeholder="Enter your name" required />
+        <br />
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" placeholder="What would you like to write?" required></textarea>
         <input type="hidden" value="@blog.ID" name="BlogID" />
-    </div>
-    <input type="submit" style="width: auto; font-weight: 600;" value="Post" /><br />
-</form>
+        <input type="submit" value="Post Comment" /><br />
+    </form>
 
+</body>
 
+</html>
 
