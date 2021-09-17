@@ -144,7 +144,14 @@ namespace LloydStephanieRealty.Controllers
         {
             mailingListRepository.AddUser(user);
 
-            var email = new MimeMessage();
+            string emailSubject = "Test Email Subject";
+            string emailContents = "<h1>WELCOME TO THE NEWSLETTER</h1>";
+
+            EmailToCustomer email = new EmailToCustomer();
+
+            email.SendConfirmationEmail(emailSubject, emailContents, user.Email);
+
+            /*var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("alavtechnoreply@gmail.com"));
             email.To.Add(MailboxAddress.Parse(user.Email));
             email.Subject = "Test Email Subject";
@@ -153,8 +160,7 @@ namespace LloydStephanieRealty.Controllers
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
             smtp.Authenticate("alavtechnoreply@gmail.com", "AlavTech123!");
-            smtp.Send(email);
-            smtp.Disconnect(true);
+            smtp.Send(email); */
 
             return RedirectToAction("ContactUs");
         }

@@ -41,6 +41,11 @@ namespace LloydStephanieRealty.Controllers
             return View();
         }
 
+        public IActionResult SendEmailToAll()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult AddBlog(Blog blog)
         {
@@ -101,6 +106,18 @@ namespace LloydStephanieRealty.Controllers
         public IActionResult DeleteUser(int ID)
         {
             mailingListRepository.DeleteUser(ID);
+            return RedirectToAction("MailingListIndex");
+        }
+
+        [HttpPost]
+        public IActionResult SendEmailToAllSubscribers()
+        {
+            string emailSubject = Request.Form["subject"];
+            string emailContent = Request.Form["content"];
+
+            EmailToCustomer email = new EmailToCustomer();
+            email.SendEmailToGroup(emailSubject, emailContent, mailingListRepository.Users);
+
             return RedirectToAction("MailingListIndex");
         }
     }
