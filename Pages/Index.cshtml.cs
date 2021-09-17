@@ -18,11 +18,11 @@ namespace LloydStephanieRealty.Pages
             _context = context;
         }
 
-        public IList<User> User { get;set; }
+        public IList<MailingListUser> User { get;set; }
 
         public async Task OnGetAsync()
         {
-            User = await _context.Users.ToListAsync();
+            User = await _context.MailingListUsers.ToListAsync();
         }
     }
 }

@@ -4,14 +4,16 @@ using LloydStephanieRealty.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LloydStephanieRealty.Migrations
 {
     [DbContext(typeof(MBS_DBContext))]
-    partial class MBS_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210917012759_Sept16Migration")]
+    partial class Sept16Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,22 +78,13 @@ namespace LloydStephanieRealty.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsLookingToBuy")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsLookingToSell")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NeighbourhoodOfInterest")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

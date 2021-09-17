@@ -5,20 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LloydStephanieRealty.Models;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.Mail;
+//using System.Net.Mail;
 using System.Net;
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Security;
+using MailKit.Net.Smtp;
 
 namespace LloydStephanieRealty.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserRepository repository;
+        private IMailingListRepository mailingListRepository;
         private MBS_DBContext _dbContext;
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
-        public HomeController(IUserRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment)
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment)
         {
-            repository = userRepository;
+            mailingListRepository = userRepository;
             _dbContext = dbContext;
             blogRepository = blog;
             commentRepository = comment;
@@ -36,17 +40,18 @@ namespace LloydStephanieRealty.Controllers
             };
 
             smtpClient.Send("email", "recipient", "subject", "body");*/
-            return View(repository.Users);
+            return View();
         }
         [HttpGet]
         public ViewResult Create()
         {
             return View();
         }
+        /*
         [HttpPost]
-        public ViewResult Create(User user)
+        public ViewResult Create(MailingListUser user)
         {
-            _dbContext.Users.AddRange(user);
+            _dbContext.MailingListUsers.AddRange(user);
             _dbContext.SaveChanges();
             return View("index", repository.Users);
         }
@@ -56,15 +61,17 @@ namespace LloydStephanieRealty.Controllers
             return View();
         }
         [HttpPost]
-        public ViewResult LoginPage(User user)
+        public ViewResult LoginPage(MailingListUser user)
         {
-            string pass = _dbContext.Users.Where(u => u.Username == user.Username)
+            /*
+            string pass = _dbContext.MailingListUsers.Where(u => u.Username == user.Username)
                    .Select(u => u.Password)
                    .FirstOrDefault();
             if (pass == user.Password)
             {
                 return View("index", repository.Users);
             }
+            
             return View();
         }
 
@@ -72,10 +79,16 @@ namespace LloydStephanieRealty.Controllers
         {
            return View();
         }
+
+        */
         public IActionResult Blogs()
         {
             IQueryable<Blog> blogs = blogRepository.Blogs;
             return View(blogs);
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
         }
         public IActionResult Blog(int id)
         {
@@ -124,6 +137,26 @@ namespace LloydStephanieRealty.Controllers
             commentRepository.AddComment(comment);
 
             return RedirectToAction("Blog", new { @id = blog.ID });
+        }
+
+        [HttpPost]
+        public IActionResult AddMailingListUser(MailingListUser user)
+        {
+            mailingListRepository.AddUser(user);
+
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("alavtechnoreply@gmail.com"));
+            email.To.Add(MailboxAddress.Parse(user.Email));
+            email.Subject = "Test Email Subject";
+            email.Body = new TextPart(TextFormat.Html) { Text = "<h1>WELCOME TO THE NEWSLETTER</h1>" };
+
+            using var smtp = new SmtpClient();
+            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate("alavtechnoreply@gmail.com", "AlavTech123!");
+            smtp.Send(email);
+            smtp.Disconnect(true);
+
+            return RedirectToAction("ContactUs");
         }
     }
 }

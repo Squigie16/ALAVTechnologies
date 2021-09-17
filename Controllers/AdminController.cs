@@ -9,12 +9,14 @@ namespace LloydStephanieRealty.Controllers
 {
     public class AdminController : Controller
     {
+        private IMailingListRepository mailingListRepository;
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository)
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
+            mailingListRepository = mlRepository;
         }
 
         public IActionResult AdminIndex()
@@ -27,6 +29,13 @@ namespace LloydStephanieRealty.Controllers
             IQueryable<Blog> blogs = blogRepository.Blogs;
             return View(blogs);
         }
+
+        public IActionResult MailingListIndex()
+        {
+            IQueryable<MailingListUser> mailingListUsers = mailingListRepository.Users;
+            return View(mailingListUsers);
+        }
+
         public IActionResult AddBlog()
         {
             return View();
@@ -86,6 +95,13 @@ namespace LloydStephanieRealty.Controllers
         {
             commentRepository.DeleteComment(CommentID);
             return RedirectToAction("BlogIndex");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUser(int ID)
+        {
+            mailingListRepository.DeleteUser(ID);
+            return RedirectToAction("MailingListIndex");
         }
     }
 }

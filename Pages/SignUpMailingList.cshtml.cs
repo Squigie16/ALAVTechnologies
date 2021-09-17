@@ -23,7 +23,7 @@ namespace LloydStephanieRealty.Pages
         }
 
         [BindProperty]
-        public User User { get; set; }
+        public MailingListUser User { get; set; }
         [BindProperty]
         public string firstName { get; set; }
         [BindProperty]
@@ -36,10 +36,10 @@ namespace LloydStephanieRealty.Pages
             {
                 return Page();
             }
-            User.Username = firstName + " " + lastName;
-            User.IsMailing = true;
+            //User.Username = firstName + " " + lastName;
+            //User.IsMailing = true;
 
-            _context.Users.Add(User);
+            _context.MailingListUsers.Add(User);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -10,7 +10,7 @@ namespace LloydStephanieRealty.Models
         public MBS_DBContext(DbContextOptions<MBS_DBContext> options)
             : base(options) { }
         //entity
-        public DbSet<User> Users { get; set; }
+        public DbSet<MailingListUser> MailingListUsers { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Comment> Comments {get; set;}
     }

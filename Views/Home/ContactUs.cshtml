@@ -1,0 +1,39 @@
+﻿@model LloydStephanieRealty.Models.MailingListUser
+@{
+    Layout = "_Layout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Contact Us</h2>
+
+    <form asp-action="AddMailingListUser" method="post">
+        <label for="uFirst" asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" type="text" />
+        <br />
+        <label for="uLast" asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" type="text" />
+        <br />
+        <label for="uEmail" asp-for="Email">Email Address</label>
+        <input asp-for="Email" type="text" />
+        <br />
+        <label for="uPhoneNumber" asp-for="PhoneNumber">Phone Number (Optional)</label>
+        <input asp-for="PhoneNumber" type="text" />
+        <br />
+        <label for="uLookingToBuy" asp-for="IsLookingToBuy">Are you looking to buy?</label>
+        <input asp-for="IsLookingToBuy" type="checkbox" />
+        <br />
+        <label for="uLookingToSell" asp-for="IsLookingToSell">Are you looking to sell?</label>
+        <input asp-for="IsLookingToSell" type="checkbox" />
+        <br />
+        <label for="uNeighbourhoods" asp-for="NeighbourhoodOfInterest">What are your neighbourhood's of interest?</label>
+        <input asp-for="NeighbourhoodOfInterest" type="text" />
+        <input type="submit" value="Sign Up" /><br />
+        <br />
+    </form>
+
+</body>
+
+</html>

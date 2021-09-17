@@ -31,7 +31,7 @@ namespace LloydStephanieRealty
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:AlecConnStr"]);
             });
-            services.AddScoped<IUserRepository, EFStoreRepository>();
+            services.AddScoped<IMailingListRepository, EFMailingListRepository>();
             services.AddScoped<IBlogRepository, EFBlogRepository>();
             services.AddScoped<ICommentRepository, EFCommentRepository>();
         }
