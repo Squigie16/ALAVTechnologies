@@ -12,11 +12,13 @@ namespace LloydStephanieRealty.Controllers
         private IMailingListRepository mailingListRepository;
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository)
+        private IWebsiteContentsRepository contentsRepository;
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
             mailingListRepository = mlRepository;
+            contentsRepository = contents;
         }
 
         public IActionResult AdminIndex()
@@ -28,6 +30,27 @@ namespace LloydStephanieRealty.Controllers
         {
             IQueryable<Blog> blogs = blogRepository.Blogs;
             return View(blogs);
+        }
+        public IActionResult WebsiteContentsIndex()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUsAdmin()
+        {
+            ViewData["AboutUsHeader"] = contentsRepository.Content.AboutUsHeader;
+            ViewData["AboutUsPara"] = contentsRepository.Content.AboutUsParagraph;
+            return View();
+        }
+
+        public IActionResult CompanyDetailsAdmin()
+        {
+            ViewData["email"] = contentsRepository.Content.CompanyEmailAddress;
+            ViewData["phonenumber"] = contentsRepository.Content.CompanyPhoneNumber;
+            ViewData["address"] = contentsRepository.Content.CompanyHeadquarters;
+            ViewData["IGURL"] = contentsRepository.Content.InstagramURL;
+            ViewData["FBURL"] = contentsRepository.Content.FacebookURL;
+            return View();
         }
 
         public IActionResult MailingListIndex()
@@ -119,6 +142,26 @@ namespace LloydStephanieRealty.Controllers
             email.SendEmailToGroup(emailSubject, emailContent, mailingListRepository.Users);
 
             return RedirectToAction("MailingListIndex");
+        }
+        [HttpPost]
+        public IActionResult EditAboutUs()
+        {
+            string newHeader = Request.Form["header"];
+            string newPara = Request.Form["paragraph"];
+            contentsRepository.EditAboutUsContents(newHeader, newPara);
+            return RedirectToAction("WebsiteContentsIndex");
+        }
+
+        [HttpPost]
+        public IActionResult EditCompanyDetails()
+        {
+            string newNumber = Request.Form["phoneNumber"];
+            string newEmail = Request.Form["email"];
+            string newAddress = Request.Form["address"];
+            string newIG = Request.Form["igURL"];
+            string newFB = Request.Form["fbURL"];
+            contentsRepository.EditCompanyDetails(newNumber, newEmail, newAddress, newIG, newFB);
+            return RedirectToAction("WebsiteContentsIndex");
         }
     }
 }

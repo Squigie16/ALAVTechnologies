@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "_AdminLayout";
+    string companyPhoneNumber = ViewData["phoneNumber"] as string;
+    string companyEmail = ViewData["email"] as string;
+    string companyAddress = ViewData["address"] as string;
+    string companyIGURL = ViewData["IGURL"] as string;
+    string companyFBURL = ViewData["FBURL"] as string;
+}
+<html>
+<head>
+
+</head>
+<body>
+    <h2>Edit Company Details</h2>
+
+    <form asp-action="EditCompanyDetails" method="post">
+        <label>Company Phone Number</label>
+        <input name="phoneNumber" type="text" value="@companyPhoneNumber" required />
+        <br />
+
+        <label>Company Email Address</label>
+        <input name="email" type="text" value="@companyEmail" required />
+        <br />
+
+        <label>Company Address</label>
+        <input name="address" type="text" value="@companyAddress" required />
+        <br />
+
+        <label>Company Instagram URL (Clicking on the IG logo will Redirect you to this URL)</label>
+        <input name="igURL" type="text" value="@companyIGURL" required />
+        <br />
+
+        <label>Company Facebook URL (Clicking on the FB logo will redirect you to this URL)</label>
+        <input name="fbURL" type="text" value="@companyFBURL" required />
+        <br />
+
+        <input type="submit" value="Save Changes" /><br />
+    </form>
+    <br />
+
+</body>
+
+</html>

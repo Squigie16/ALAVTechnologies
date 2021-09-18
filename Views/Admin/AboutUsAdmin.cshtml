@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_AdminLayout";
+    string aboutUsHeader = ViewData["AboutUsHeader"] as string;
+    string aboutUsPara = ViewData["AboutUsPara"] as string;
+}
+<html>
+<head>
+    
+</head>
+<body>
+    <h2>Edit About Us Page Contents</h2>
+
+    <form asp-action="EditAboutUs" method="post">
+        <label>About Us Header</label>
+        <input name="header" type="text" value="@aboutUsHeader" required />
+        <br />
+
+        <label>Paragraph</label>
+        <textarea name="paragraph" required>@aboutUsPara</textarea><br />
+        <input type="submit" value="Save Changes" /><br /> 
+    </form>
+    <br />
+
+</body>
+
+</html>

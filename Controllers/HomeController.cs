@@ -20,12 +20,14 @@ namespace LloydStephanieRealty.Controllers
         private MBS_DBContext _dbContext;
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
-        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment)
+        private IWebsiteContentsRepository contentsRepository;
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents)
         {
             mailingListRepository = userRepository;
             _dbContext = dbContext;
             blogRepository = blog;
             commentRepository = comment;
+            contentsRepository = contents;
         }
         public IActionResult Index()
         {
@@ -90,6 +92,15 @@ namespace LloydStephanieRealty.Controllers
         {
             return View();
         }
+
+        public IActionResult AboutUs()
+        {
+            WebsiteContents aboutUsContents = contentsRepository.Content;
+            ViewData["AboutUsHeader"] = aboutUsContents.AboutUsHeader;
+            ViewData["AboutUsPara"] = aboutUsContents.AboutUsParagraph;
+            return View();
+        }
+
         public IActionResult Blog(int id)
         {
             Blog blog = new Blog();
@@ -150,17 +161,6 @@ namespace LloydStephanieRealty.Controllers
             EmailToCustomer email = new EmailToCustomer();
 
             email.SendConfirmationEmail(emailSubject, emailContents, user.Email);
-
-            /*var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("alavtechnoreply@gmail.com"));
-            email.To.Add(MailboxAddress.Parse(user.Email));
-            email.Subject = "Test Email Subject";
-            email.Body = new TextPart(TextFormat.Html) { Text = "<h1>WELCOME TO THE NEWSLETTER</h1>" };
-
-            using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("alavtechnoreply@gmail.com", "AlavTech123!");
-            smtp.Send(email); */
 
             return RedirectToAction("ContactUs");
         }

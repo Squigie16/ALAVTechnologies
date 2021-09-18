@@ -34,6 +34,7 @@ namespace LloydStephanieRealty
             services.AddScoped<IMailingListRepository, EFMailingListRepository>();
             services.AddScoped<IBlogRepository, EFBlogRepository>();
             services.AddScoped<ICommentRepository, EFCommentRepository>();
+            services.AddScoped<IWebsiteContentsRepository, EFWebsiteContentsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
