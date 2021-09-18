@@ -4,14 +4,16 @@ using LloydStephanieRealty.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LloydStephanieRealty.Migrations
 {
     [DbContext(typeof(MBS_DBContext))]
-    partial class MBS_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20210918030525_AddImagesToBlogMigration")]
+    partial class AddImagesToBlogMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,13 +34,15 @@ namespace LloydStephanieRealty.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageID")
+                    b.Property<int?>("ImageId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Blogs");
                 });
@@ -115,6 +119,15 @@ namespace LloydStephanieRealty.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("MailingListUsers");
+                });
+
+            modelBuilder.Entity("LloydStephanieRealty.Models.Blog", b =>
+                {
+                    b.HasOne("LloydStephanieRealty.Models.ImageModel", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("LloydStephanieRealty.Models.Comment", b =>

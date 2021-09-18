@@ -1,6 +1,7 @@
 ﻿@model LloydStephanieRealty.Models.Comment
 @{
     LloydStephanieRealty.Models.Blog blog = ViewData["Blog"] as LloydStephanieRealty.Models.Blog;
+    LloydStephanieRealty.Models.ImageModel image = ViewData["Image"] as LloydStephanieRealty.Models.ImageModel;
     List<LloydStephanieRealty.Models.Comment> comments = ViewData["Comments"] as List<LloydStephanieRealty.Models.Comment>;
     Layout = "_Layout";
 }
@@ -14,6 +15,8 @@
 
     <h2>@blog.Title</h2>
 
+    <img src="@("~/image/"+image.ImageName)" asp-append-version="true" width="250px" height="250px" />
+
     <p>@blog.Description</p>
 
     @if (comments != null)
@@ -22,8 +25,8 @@
         @foreach (LloydStephanieRealty.Models.Comment comment in comments)
         {
             var ts = new TimeSpan(DateTime.Now.Ticks - comment.DateOfComment.Ticks);
-                <p><b>@comment.Name: </b> <i>@ts.Minutes Minutes Ago</i></p>
-                <p>@comment.Description</p>
+            <p><b>@comment.Name: </b> <i>@ts.Minutes Minutes Ago</i></p>
+            <p>@comment.Description</p>
         }
     }
     <h4>Add A comment</h4>

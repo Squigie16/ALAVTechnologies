@@ -13,6 +13,7 @@ namespace LloydStephanieRealty.Models
         public DbSet<MailingListUser> MailingListUsers { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Comment> Comments {get; set;}
+        public virtual DbSet<ImageModel> Images { get; set; }
 
         public static WebsiteContents contents = new WebsiteContents();
         public WebsiteContents websiteContents { get; set; } = contents;

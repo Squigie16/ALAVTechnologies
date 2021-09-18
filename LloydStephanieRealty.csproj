@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Shared\" />
+    <Folder Include="wwwroot\image\" />
   </ItemGroup>
 
 </Project>

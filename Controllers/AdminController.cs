@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LloydStephanieRealty.Models;
+using System.IO;
 
 namespace LloydStephanieRealty.Controllers
 {
@@ -13,12 +14,14 @@ namespace LloydStephanieRealty.Controllers
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
         private IWebsiteContentsRepository contentsRepository;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents)
+        private IImageModelRepository imageRepository;
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
             mailingListRepository = mlRepository;
             contentsRepository = contents;
+            imageRepository = iRepository;
         }
 
         public IActionResult AdminIndex()
@@ -70,9 +73,12 @@ namespace LloydStephanieRealty.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBlog(Blog blog)
+        public async Task<IActionResult> AddBlog(Blog blog)
         {
+            ImageModel image = blog.Image;
+            int imageID = await imageRepository.AddImageAsync(image);
             blog.DateOfPost = DateTime.Now;
+            blog.ImageID = imageID;
             blogRepository.AddBlog(blog);
 
             return RedirectToAction("BlogIndex");

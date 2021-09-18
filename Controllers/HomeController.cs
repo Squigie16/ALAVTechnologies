@@ -21,13 +21,15 @@ namespace LloydStephanieRealty.Controllers
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
         private IWebsiteContentsRepository contentsRepository;
-        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents)
+        private IImageModelRepository imageRepository;
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
         {
             mailingListRepository = userRepository;
             _dbContext = dbContext;
             blogRepository = blog;
             commentRepository = comment;
             contentsRepository = contents;
+            imageRepository = iRepository;
         }
         public IActionResult Index()
         {
@@ -80,6 +82,18 @@ namespace LloydStephanieRealty.Controllers
                 }
             }
 
+            ImageModel image = new ImageModel();
+
+            foreach (ImageModel i in imageRepository.Images)
+            {
+                if(blog.ImageID == i.ImageId)
+                {
+                    image = i;
+                    break;
+                }
+            }
+
+            ViewData["Image"] = image;
             ViewData["Comments"] = commentsOnPost;
             ViewData["Blog"] = blog;
             return View();
