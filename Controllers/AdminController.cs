@@ -51,8 +51,6 @@ namespace LloydStephanieRealty.Controllers
             ViewData["email"] = contentsRepository.Content.CompanyEmailAddress;
             ViewData["phonenumber"] = contentsRepository.Content.CompanyPhoneNumber;
             ViewData["address"] = contentsRepository.Content.CompanyHeadquarters;
-            ViewData["IGURL"] = contentsRepository.Content.InstagramURL;
-            ViewData["FBURL"] = contentsRepository.Content.FacebookURL;
             return View();
         }
 

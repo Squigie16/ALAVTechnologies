@@ -26,7 +26,8 @@ namespace LloydStephanieRealty.Models
             string fileName = Path.GetFileNameWithoutExtension(image.ImageFile.FileName);
             string extension = Path.GetExtension(image.ImageFile.FileName);
             image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+            string path = Path.Combine(wwwRootPath + "/image/", fileName);
+            Console.WriteLine("Image Path: " + path);
 
             using (var fileStream = new FileStream(path, FileMode.Create))
             {

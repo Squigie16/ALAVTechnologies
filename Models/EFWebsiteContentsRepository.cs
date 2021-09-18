@@ -26,8 +26,6 @@ namespace LloydStephanieRealty.Models
             context.websiteContents.CompanyPhoneNumber = phoneNumber;
             context.websiteContents.CompanyEmailAddress = email;
             context.websiteContents.CompanyHeadquarters = address;
-            context.websiteContents.InstagramURL = igURL;
-            context.websiteContents.FacebookURL = fbURL;
         }
     }
 }
