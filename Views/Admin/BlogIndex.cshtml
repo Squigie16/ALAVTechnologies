@@ -29,6 +29,7 @@
                     <td>
                         <form asp-action="DeleteBlog" method="post">
                             <input type="hidden" value="@blog.ID" name="BlogID" />
+                            <input type="hidden" value="@blog.ImageID" name="ImageID" />
                             <button type="submit">Delete</button>
                         </form>
                     </td>

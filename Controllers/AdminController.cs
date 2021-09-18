@@ -119,8 +119,9 @@ namespace LloydStephanieRealty.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteBlog(int BlogID)
+        public IActionResult DeleteBlog(int BlogID, int ImageID)
         {
+            imageRepository.DeleteImage(ImageID);
             blogRepository.DeleteBlog(BlogID);
             return RedirectToAction("BlogIndex");
         }

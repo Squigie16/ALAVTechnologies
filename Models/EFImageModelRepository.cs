@@ -36,14 +36,19 @@ namespace LloydStephanieRealty.Models
             context.Images.Add(image);
             await context.SaveChangesAsync();
 
-            ImageModel savedImage = context.Images.Find(image);
-
-            return savedImage.ImageId;
+            return image.ImageId;
         }
 
         public void DeleteImage(int id)
         {
+            var image = context.Images.Find(id);
 
+            var imagePath = Path.Combine(hostEnvironment.WebRootPath, "image", image.ImageName);
+            Console.WriteLine("Image Path: " + imagePath);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+            context.Images.Remove(image);
+            context.SaveChanges();
         }
     }
 }
