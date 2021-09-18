@@ -44,10 +44,26 @@ namespace LloydStephanieRealty.Controllers
         public IActionResult Blogs()
         {
             IQueryable<Blog> blogs = blogRepository.Blogs;
+            IQueryable<ImageModel> allImages = imageRepository.Images;
+            //List<ImageModel> images = new List<ImageModel>();
+            foreach(Blog b in blogs)
+            {
+                foreach(ImageModel i in allImages)
+                {
+                    if(b.ImageID == i.ImageId)
+                    {
+                        b.Image = i;
+                    }
+                }
+            }
             return View(blogs);
         }
         public IActionResult ContactUs()
         {
+            WebsiteContents contactUsContents = contentsRepository.Content;
+            ViewData["emailAddress"] = contactUsContents.CompanyEmailAddress;
+            ViewData["phoneNumber"] = contactUsContents.CompanyPhoneNumber;
+            ViewData["companyOfficeAddress"] = contactUsContents.CompanyHeadquarters;
             return View();
         }
 

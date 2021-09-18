@@ -1,5 +1,8 @@
 ﻿@model LloydStephanieRealty.Models.MailingListUser
 @{
+    string emailAddress = ViewData["emailAddress"] as string;
+    string phoneNumber = ViewData["phoneNumber"] as string;
+    string companyAddress = ViewData["companyOfficeAddress"] as string;
     Layout = "_Layout";
 }
 <html>
@@ -34,6 +37,10 @@
         <br />
     </form>
 
+    <h5>You can also contact us by</h5>
+    <p><b>Phone Number: </b>@phoneNumber</p>
+    <p><b>Email Address: </b>@emailAddress</p>
+    <p><b>Office Location: </b>@companyAddress</p>
 </body>
 
 </html>

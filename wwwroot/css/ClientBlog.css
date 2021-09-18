@@ -31,16 +31,28 @@ input[type=submit] {
         background-color: #917e2c;
     }
 
-#readMore {
-    background-color: #A38D31;
-    padding: 2px 6px 2px 6px;
-    color: white;
-    border-radius: 4px;
+#postLink {
+    color: black;
 }
-    #readMore:hover {
-        background-color: #917e2c;
+    #postLink:hover {
         text-decoration: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+
+#displayBlog {
+    flex: 1;
+    width: 400px;
+    margin: 20px 50px 20px 50px;
+}
+
+#allBlogs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+    
 
 table {
     border-collapse: collapse;

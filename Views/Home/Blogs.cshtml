@@ -1,6 +1,8 @@
 ﻿@model IQueryable<LloydStephanieRealty.Models.Blog>
 @{
     Layout = "_Layout";
+    int wordCount = 0;
+    int index = 0;
 }
 <html>
 <head>
@@ -8,27 +10,37 @@
 </head>
 <body>
     <h2>Blogs</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Blog Title</th>
-                <th>Date Posted</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var blog in Model)
-            {
-                <tr>
-                    <td>
-                        <p><b>Title: </b> @blog.Title</p>
-                        <p>Summary: @blog.Description.Substring(0, (blog.Description.Length / 4))</p>
-                        <a id="readMore" asp-controller="Home" asp-action="Blog" asp-route-id="@blog.ID">Read More</a>
-                    </td>
-                    <td>@blog.DateOfPost.DayOfWeek, @blog.DateOfPost.ToString("MMMM") @blog.DateOfPost.Day, @blog.DateOfPost.Year</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div id="allBlogs">
+        @foreach (var blog in Model)
+        {
+            <a id="postLink" asp-controller="Home" asp-action="Blog" asp-route-id="@blog.ID">
+                <div id="displayBlog">
+                    <img src="@("~/image/"+blog.Image.ImageName)" asp-append-version="true" width="400px" height="225px"  />
+                    <h5>@blog.Title</h5>
+                    @{ 
+                        index = 0;
+                        wordCount = 0;
+                        while (index < blog.Description.Length)
+                        {
+                            while (index < blog.Description.Length && !char.IsWhiteSpace(blog.Description[index]))
+                                index++;
+
+                            wordCount++;
+
+                            while (index < blog.Description.Length && char.IsWhiteSpace(blog.Description[index]))
+                                index++;
+
+                            if (wordCount == 25)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    <p>@blog.Description.Substring(0, index) ...</p>
+                </div>
+            </a>
+        }
+    </div>
 </body>
 
 </html>
