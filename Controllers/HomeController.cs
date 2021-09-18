@@ -31,17 +31,6 @@ namespace LloydStephanieRealty.Controllers
         }
         public IActionResult Index()
         {
-            //_dbContext.Users.addRange(user);
-            //_dbContext.SaveChanges
-            //_dbContext.Teachers.Remove(repository.Users.Where(r => r.ID == user.ID).FirstOrDefault());
-            /*var smtpClient = new SmtpClient("smtp.gmail.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential("email", "password"),
-                EnableSsl = true,
-            };
-
-            smtpClient.Send("email", "recipient", "subject", "body");*/
             return View();
         }
         [HttpGet]
@@ -49,40 +38,7 @@ namespace LloydStephanieRealty.Controllers
         {
             return View();
         }
-        /*
-        [HttpPost]
-        public ViewResult Create(MailingListUser user)
-        {
-            _dbContext.MailingListUsers.AddRange(user);
-            _dbContext.SaveChanges();
-            return View("index", repository.Users);
-        }
-        [HttpGet]
-        public ViewResult LoginPage()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ViewResult LoginPage(MailingListUser user)
-        {
-            /*
-            string pass = _dbContext.MailingListUsers.Where(u => u.Username == user.Username)
-                   .Select(u => u.Password)
-                   .FirstOrDefault();
-            if (pass == user.Password)
-            {
-                return View("index", repository.Users);
-            }
-            
-            return View();
-        }
-
-        public ViewResult SignUpMailingList()
-        {
-           return View();
-        }
-
-        */
+    
         public IActionResult Blogs()
         {
             IQueryable<Blog> blogs = blogRepository.Blogs;

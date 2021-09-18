@@ -14,6 +14,7 @@ namespace LloydStephanieRealty.Models
         public string CompanyHeadquarters { get; set; } = "123 Main St";
         public string InstagramURL { get; set; } = "https://www.instagram.com/petroff.oliverhomes/";
         public string FacebookURL { get; set; } = "https://www.facebook.com/petroff.oliverhomes/";
+        public string InitialSignUpEmail { get; set; }
         public string HomePageHeader { get; set; }
         public string HomePageParagraph { get; set; }
     }
