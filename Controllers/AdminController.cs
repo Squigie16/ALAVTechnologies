@@ -131,6 +131,7 @@ namespace LloydStephanieRealty.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog blog)
         {
+            blog.DateOfPost = DateTime.Now;
             blogRepository.EditBlog(blog);
             return RedirectToAction("BlogIndex");
         }
