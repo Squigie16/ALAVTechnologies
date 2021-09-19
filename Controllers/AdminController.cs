@@ -70,6 +70,16 @@ namespace LloydStephanieRealty.Controllers
             return View();
         }
 
+        public IActionResult SendEmailToSellers()
+        {
+            return View();
+        }
+
+        public IActionResult SendEmailToBuyers()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddBlog(Blog blog)
         {
@@ -157,6 +167,56 @@ namespace LloydStephanieRealty.Controllers
 
             return RedirectToAction("MailingListIndex");
         }
+
+        [HttpPost]
+        public IActionResult SendEmailToAllSellers()
+        {
+            string emailSubject = Request.Form["subject"];
+            string emailContent = Request.Form["content"];
+
+            EmailToCustomer email = new EmailToCustomer();
+
+            List<MailingListUser> users = new List<MailingListUser>();
+
+            foreach (MailingListUser ml in mailingListRepository.Users)
+            {
+                if(ml.IsLookingToSell == true)
+                {
+                    users.Add(ml);
+                }
+            }
+
+            IQueryable<MailingListUser> usersWhoWantToSell = users.AsQueryable();
+
+            email.SendEmailToGroup(emailSubject, emailContent, usersWhoWantToSell);
+
+            return RedirectToAction("MailingListIndex");
+        }
+
+        public IActionResult SendEmailToAllBuyers()
+        {
+            string emailSubject = Request.Form["subject"];
+            string emailContent = Request.Form["content"];
+
+            EmailToCustomer email = new EmailToCustomer();
+
+            List<MailingListUser> users = new List<MailingListUser>();
+
+            foreach (MailingListUser ml in mailingListRepository.Users)
+            {
+                if (ml.IsLookingToBuy == true)
+                {
+                    users.Add(ml);
+                }
+            }
+
+            IQueryable<MailingListUser> usersWhoWantToBuy = users.AsQueryable();
+
+            email.SendEmailToGroup(emailSubject, emailContent, usersWhoWantToBuy);
+
+            return RedirectToAction("MailingListIndex");
+        }
+
         [HttpPost]
         public IActionResult EditAboutUs()
         {

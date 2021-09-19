@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Enter the details below for an email going out to all users signed up who are looking to buy</h2>
+
+    <form asp-action="SendEmailToAllBuyers" method="post">
+        <label for="bTitle"></label>
+        <input type="text" id="bTitle" name="subject" required placeholder="The subject goes here..." />
+        <br />
+
+        <label id="bDesc"></label>
+        <textarea id="bDesc" name="content" required placeholder="What would you like to write?"></textarea><br />
+        <input type="submit" value="Send Email to All Subscribed Clients" /><br />
+    </form>
+
+</body>
+
+</html>
