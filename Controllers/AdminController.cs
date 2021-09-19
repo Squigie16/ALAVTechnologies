@@ -83,7 +83,7 @@ namespace LloydStephanieRealty.Controllers
         }
 
         public IActionResult EditBlog(int id)
-        {
+        { 
             Blog blog = new Blog();
             IQueryable<Blog> blogs = blogRepository.Blogs;
             foreach(Blog b in blogs)
@@ -91,6 +91,15 @@ namespace LloydStephanieRealty.Controllers
                 if(id == b.ID)
                 {
                     blog = b;
+                    break;
+                }
+            }
+            
+            foreach(ImageModel i in imageRepository.Images)
+            {
+                if(blog.ImageID == i.ImageId)
+                {
+                    blog.Image = i;
                     break;
                 }
             }
