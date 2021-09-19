@@ -27,5 +27,12 @@ namespace LloydStephanieRealty.Models
             context.websiteContents.CompanyEmailAddress = email;
             context.websiteContents.CompanyHeadquarters = address;
         }
+
+        public void EditHomePage(string talkToUsText, string meetUsText, string connectWithUsText)
+        {
+            context.websiteContents.HomePageTalkToUsText = talkToUsText;
+            context.websiteContents.HomePageMeetUsText = meetUsText;
+            context.websiteContents.HomePageConnectWithUsText = connectWithUsText;
+        }
     }
 }

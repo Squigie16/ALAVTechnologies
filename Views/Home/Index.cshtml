@@ -1,12 +1,36 @@
 ﻿@{
+    string talkToUsText = ViewData["talkToUsText"] as string;
+    string meetUsText = ViewData["meetUsText"] as string;
+    string connectWithUsText = ViewData["connectWithUsText"] as string;
     Layout = "_Layout";
 }
 <html>
 <head>
+    <link rel="stylesheet" href="~/css/HomePage.css" />
 </head>
 <body>
-    <h2>Home Page</h2>
-
+    <div id="homeLanding">
+    </div>
+    <div id="quickLinks">
+        <a id="talkToUsLink" asp-controller="Home" asp-action="ContactUs">
+            <div id="talkToUs">
+                <h5>Talk To Us</h5>
+                <p>@talkToUsText</p>
+            </div>
+        </a>
+        <a id="meetUsLink" asp-controller="Home" asp-action="AboutUs">
+            <div id="meetUs">
+                <h5>Meet Us</h5>
+                <p>@meetUsText</p>
+            </div>
+        </a>
+        <a id="connectWithUsLink" asp-controller="Home" asp-action="Blogs">
+            <div id="connectWithUs">
+                <h5>Connect With Us</h5>
+                <p>@connectWithUsText</p>
+            </div>
+        </a>
+    </div>
 
 </body>
 

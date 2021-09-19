@@ -9,7 +9,7 @@ namespace LloydStephanieRealty.Models
     {
         WebsiteContents Content { get; }
         void EditAboutUsContents(string header, string content);
-
         void EditCompanyDetails(string phoneNumber, string email, string address, string igURL, string fbURL);
+        void EditHomePage(string talkToUsText, string meetUsText, string connectWithUsText);
     }
 }

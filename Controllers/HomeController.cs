@@ -33,6 +33,10 @@ namespace LloydStephanieRealty.Controllers
         }
         public IActionResult Index()
         {
+            WebsiteContents homePageContents = contentsRepository.Content;
+            ViewData["talkToUsText"] = homePageContents.HomePageTalkToUsText;
+            ViewData["meetUsText"] = homePageContents.HomePageMeetUsText;
+            ViewData["connectWithUsText"] = homePageContents.HomePageConnectWithUsText;
             return View();
         }
         [HttpGet]

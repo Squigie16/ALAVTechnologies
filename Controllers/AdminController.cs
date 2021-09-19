@@ -54,6 +54,14 @@ namespace LloydStephanieRealty.Controllers
             return View();
         }
 
+        public IActionResult HomePageAdmin()
+        {
+            ViewData["talkToUsText"] = contentsRepository.Content.HomePageTalkToUsText;
+            ViewData["meetUsText"] = contentsRepository.Content.HomePageMeetUsText;
+            ViewData["connectWithUsText"] = contentsRepository.Content.HomePageConnectWithUsText;
+            return View();
+        }
+
         public IActionResult MailingListIndex()
         {
             IQueryable<MailingListUser> mailingListUsers = mailingListRepository.Users;
@@ -236,6 +244,16 @@ namespace LloydStephanieRealty.Controllers
             string newIG = Request.Form["igURL"];
             string newFB = Request.Form["fbURL"];
             contentsRepository.EditCompanyDetails(newNumber, newEmail, newAddress, newIG, newFB);
+            return RedirectToAction("WebsiteContentsIndex");
+        }
+
+        [HttpPost]
+        public IActionResult EditHomePage()
+        {
+            string newTalkToUsText = Request.Form["talkToUs"];
+            string newMeetUsText = Request.Form["meetUs"];
+            string newConnectWithUsText = Request.Form["connectWithUs"];
+            contentsRepository.EditHomePage(newTalkToUsText, newMeetUsText, newConnectWithUsText);
             return RedirectToAction("WebsiteContentsIndex");
         }
     }

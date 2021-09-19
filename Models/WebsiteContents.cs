@@ -15,5 +15,8 @@ namespace LloydStephanieRealty.Models
         public string InitialSignUpEmail { get; set; }
         public string HomePageHeader { get; set; }
         public string HomePageParagraph { get; set; }
+        public string HomePageTalkToUsText { get; set; } = "Reach out to us to find out if we are your pefect fit!";
+        public string HomePageMeetUsText { get; set; } = "Get to know our background and why we would be a perfect fit for you!";
+        public string HomePageConnectWithUsText { get; set; } = "Get to know us better so we can build a long lasting relationship!";
     }
 }

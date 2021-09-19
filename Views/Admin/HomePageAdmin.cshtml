@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "_AdminLayout";
+    string talkToUsText = ViewData["talkToUsText"] as string;
+    string meetUsText = ViewData["meetUsText"] as string;
+    string connectWithUsText = ViewData["connectWithUsText"] as string;
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Edit Home Page Contents</h2>
+
+    <form asp-action="EditHomePage" method="post">
+        <label>Talk To Us Text</label>
+        <input name="talkToUs" type="text" value="@talkToUsText" required />
+        <br />
+
+        <label>Meet Us Text</label>
+        <input name="meetUs" type="text" value="@meetUsText" required />
+        <br />
+
+        <label>Connect With Us</label>
+        <input name="connectWithUs" type="text" value="@connectWithUsText" required />
+        <br />
+        <input type="submit" value="Save Changes" /><br />
+    </form>
+    <br />
+
+</body>
+
+</html>
