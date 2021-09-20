@@ -17,22 +17,22 @@ namespace LloydStephanieRealty.Models
 
         public void EditAboutUsContents(string header, string content)
         {
-            context.websiteContents.AboutUsHeader = header;
-            context.websiteContents.AboutUsParagraph = content;
+            Content.AboutUsHeader = header;
+            Content.AboutUsParagraph = content;
         }
 
-        public void EditCompanyDetails(string phoneNumber, string email, string address, string igURL, string fbURL)
+        public void EditCompanyDetails(string phoneNumber, string email, string address)
         {
-            context.websiteContents.CompanyPhoneNumber = phoneNumber;
-            context.websiteContents.CompanyEmailAddress = email;
-            context.websiteContents.CompanyHeadquarters = address;
+            Content.CompanyPhoneNumber = phoneNumber;
+            Content.CompanyEmailAddress = email;
+            Content.CompanyHeadquarters = address;
         }
 
         public void EditHomePage(string talkToUsText, string meetUsText, string connectWithUsText)
         {
-            context.websiteContents.HomePageTalkToUsText = talkToUsText;
-            context.websiteContents.HomePageMeetUsText = meetUsText;
-            context.websiteContents.HomePageConnectWithUsText = connectWithUsText;
+            Content.HomePageTalkToUsText = talkToUsText;
+            Content.HomePageMeetUsText = meetUsText;
+            Content.HomePageConnectWithUsText = connectWithUsText;
         }
     }
 }

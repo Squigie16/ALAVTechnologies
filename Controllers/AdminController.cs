@@ -241,9 +241,7 @@ namespace LloydStephanieRealty.Controllers
             string newNumber = Request.Form["phoneNumber"];
             string newEmail = Request.Form["email"];
             string newAddress = Request.Form["address"];
-            string newIG = Request.Form["igURL"];
-            string newFB = Request.Form["fbURL"];
-            contentsRepository.EditCompanyDetails(newNumber, newEmail, newAddress, newIG, newFB);
+            contentsRepository.EditCompanyDetails(newNumber, newEmail, newAddress);
             return RedirectToAction("WebsiteContentsIndex");
         }
 

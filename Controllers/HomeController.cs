@@ -33,10 +33,9 @@ namespace LloydStephanieRealty.Controllers
         }
         public IActionResult Index()
         {
-            WebsiteContents homePageContents = contentsRepository.Content;
-            ViewData["talkToUsText"] = homePageContents.HomePageTalkToUsText;
-            ViewData["meetUsText"] = homePageContents.HomePageMeetUsText;
-            ViewData["connectWithUsText"] = homePageContents.HomePageConnectWithUsText;
+            ViewData["talkToUsText"] = contentsRepository.Content.HomePageTalkToUsText;
+            ViewData["meetUsText"] = contentsRepository.Content.HomePageMeetUsText;
+            ViewData["connectWithUsText"] = contentsRepository.Content.HomePageConnectWithUsText;
             return View();
         }
         [HttpGet]
@@ -49,7 +48,6 @@ namespace LloydStephanieRealty.Controllers
         {
             IQueryable<Blog> blogs = blogRepository.Blogs;
             IQueryable<ImageModel> allImages = imageRepository.Images;
-            //List<ImageModel> images = new List<ImageModel>();
             foreach(Blog b in blogs)
             {
                 foreach(ImageModel i in allImages)
@@ -64,18 +62,16 @@ namespace LloydStephanieRealty.Controllers
         }
         public IActionResult ContactUs()
         {
-            WebsiteContents contactUsContents = contentsRepository.Content;
-            ViewData["emailAddress"] = contactUsContents.CompanyEmailAddress;
-            ViewData["phoneNumber"] = contactUsContents.CompanyPhoneNumber;
-            ViewData["companyOfficeAddress"] = contactUsContents.CompanyHeadquarters;
+            ViewData["emailAddress"] = contentsRepository.Content.CompanyEmailAddress;
+            ViewData["phoneNumber"] = contentsRepository.Content.CompanyPhoneNumber;
+            ViewData["companyOfficeAddress"] = contentsRepository.Content.CompanyHeadquarters;
             return View();
         }
 
         public IActionResult AboutUs()
         {
-            WebsiteContents aboutUsContents = contentsRepository.Content;
-            ViewData["AboutUsHeader"] = aboutUsContents.AboutUsHeader;
-            ViewData["AboutUsPara"] = aboutUsContents.AboutUsParagraph;
+            ViewData["AboutUsHeader"] = contentsRepository.Content.AboutUsHeader;
+            ViewData["AboutUsPara"] = contentsRepository.Content.AboutUsParagraph;
             return View();
         }
 
