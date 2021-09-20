@@ -32,13 +32,15 @@ namespace LloydStephanieRealty.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageID")
+                    b.Property<int?>("ImageId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Blogs");
                 });
@@ -115,6 +117,15 @@ namespace LloydStephanieRealty.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("MailingListUsers");
+                });
+
+            modelBuilder.Entity("LloydStephanieRealty.Models.Blog", b =>
+                {
+                    b.HasOne("LloydStephanieRealty.Models.ImageModel", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("LloydStephanieRealty.Models.Comment", b =>

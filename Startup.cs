@@ -29,10 +29,11 @@ namespace LloydStephanieRealty
             services.AddControllersWithViews();
             services.AddDbContext<MBS_DBContext>(opts =>
             {
-                opts.UseSqlServer(Configuration["ConnectionStrings:AlecConnStr"]);
+                opts.UseSqlServer(Configuration["ConnectionStrings:MBSConnStr"]);
             });
             services.AddScoped<IMailingListRepository, EFMailingListRepository>();
             services.AddScoped<IBlogRepository, EFBlogRepository>();
+            services.AddScoped<ITestimonyRepository, EFTestimonyRepository>();
             services.AddScoped<ICommentRepository, EFCommentRepository>();
             services.AddScoped<IWebsiteContentsRepository, EFWebsiteContentsRepository>();
             services.AddScoped<IImageModelRepository, EFImageModelRepository>();

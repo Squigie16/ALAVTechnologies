@@ -19,14 +19,16 @@ namespace LloydStephanieRealty.Controllers
         private IMailingListRepository mailingListRepository;
         private MBS_DBContext _dbContext;
         private IBlogRepository blogRepository;
+        private ITestimonyRepository testimonyRepository;
         private ICommentRepository commentRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
-        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ITestimonyRepository tRepository, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
         {
             mailingListRepository = userRepository;
             _dbContext = dbContext;
             blogRepository = blog;
+            testimonyRepository = tRepository;
             commentRepository = comment;
             contentsRepository = contents;
             imageRepository = iRepository;

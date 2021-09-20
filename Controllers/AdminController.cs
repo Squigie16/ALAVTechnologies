@@ -13,15 +13,17 @@ namespace LloydStephanieRealty.Controllers
         private IMailingListRepository mailingListRepository;
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
+        private ITestimonyRepository testimonyRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, ITestimonyRepository tRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
             mailingListRepository = mlRepository;
             contentsRepository = contents;
             imageRepository = iRepository;
+            testimonyRepository = tRepository;
         }
 
         public IActionResult AdminIndex()
@@ -69,6 +71,11 @@ namespace LloydStephanieRealty.Controllers
         }
 
         public IActionResult AddBlog()
+        {
+            return View();
+        }
+
+        public IActionResult AddTestimony()
         {
             return View();
         }
@@ -151,6 +158,46 @@ namespace LloydStephanieRealty.Controllers
             blogRepository.DeleteBlog(BlogID);
             return RedirectToAction("BlogIndex");
         }
+
+        [HttpPost]
+        public IActionResult AddTestimony(Testimony testimony)
+        {
+            testimony.DateOfPost = DateTime.Now;
+            testimonyRepository.AddTestimony(testimony);
+
+            return RedirectToAction("TestimonyIndex");
+        }
+
+        public IActionResult EditTestimony(int id)
+        {
+            Testimony testimony = new Testimony();
+            IQueryable<Testimony> testimonies = testimonyRepository.Testimonies;
+            foreach (Testimony b in testimonies)
+            {
+                if (id == b.ID)
+                {
+                    testimony = b;
+                    break;
+                }
+            }
+            return View(testimony);
+        }
+
+        [HttpPost]
+        public IActionResult EditTestimony(Testimony testimony)
+        {
+            testimony.DateOfPost = DateTime.Now;
+            testimonyRepository.EditTestimony(testimony);
+            return RedirectToAction("TestimonyIndex");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTestimony(int TestimonyID)
+        {
+            testimonyRepository.DeleteTestimony(TestimonyID);
+            return RedirectToAction("TestimonyIndex");
+        }
+
         [HttpPost]
         public IActionResult DeleteComment(int CommentID)
         {
