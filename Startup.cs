@@ -33,10 +33,10 @@ namespace LloydStephanieRealty
             });
             services.AddScoped<IMailingListRepository, EFMailingListRepository>();
             services.AddScoped<IBlogRepository, EFBlogRepository>();
-            services.AddScoped<ITestimonyRepository, EFTestimonyRepository>();
             services.AddScoped<ICommentRepository, EFCommentRepository>();
             services.AddScoped<IWebsiteContentsRepository, EFWebsiteContentsRepository>();
             services.AddScoped<IImageModelRepository, EFImageModelRepository>();
+            services.AddScoped<ITestimonyRepository, EFTestimonyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

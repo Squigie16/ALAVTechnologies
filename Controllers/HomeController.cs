@@ -23,7 +23,7 @@ namespace LloydStephanieRealty.Controllers
         private ICommentRepository commentRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
-        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ITestimonyRepository tRepository, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository)
         {
             mailingListRepository = userRepository;
             _dbContext = dbContext;

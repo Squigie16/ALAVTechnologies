@@ -16,7 +16,7 @@ namespace LloydStephanieRealty.Controllers
         private ITestimonyRepository testimonyRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, ITestimonyRepository tRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
@@ -36,6 +36,12 @@ namespace LloydStephanieRealty.Controllers
             IQueryable<Blog> blogs = blogRepository.Blogs;
             return View(blogs);
         }
+        public IActionResult TestimonyIndex()
+        {
+            IQueryable<Testimony> testimonies = testimonyRepository.Testimonies;
+            return View(testimonies);
+        }
+
         public IActionResult WebsiteContentsIndex()
         {
             return View();

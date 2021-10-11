@@ -2,18 +2,18 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/css/AdminTestimony.css" />
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
 </head>
 <body>
     <h2>Edit Testimony</h2>
 
     <form asp-action="EditTestimony" method="post">
-        <label for="bTitle" asp-for="Title"></label>
-        <input asp-for="Title" type="text" id="bTitle" required />
+        <label for="tTitle" asp-for="Title"></label>
+        <input asp-for="Title" type="text" id="tTitle" required />
         <br />
 
-        <label id="bDesc" asp-for="Description"></label>
-        <textarea asp-for="Description" id="bDesc" required></textarea><br />
+        <label id="tDesc" asp-for="Description"></label>
+        <textarea asp-for="Description" id="tDesc" required></textarea><br />
         <input type="submit" value="Post" /><br />
     </form>
     <br />
