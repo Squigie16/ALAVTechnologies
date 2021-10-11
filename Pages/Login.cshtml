@@ -1,0 +1,35 @@
+﻿@page
+@model LloydStephanieRealty.Models.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminLogin.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login Page</title>
+</head>
+<body>
+
+    <div class="login">
+        <h1>Login</h1>
+        <form asp-controller="Home" asp-action="Login" method="post">
+
+            <div asp-validation-summary="All" />
+
+            <input asp-for="Username" placeholder="Username" required/>
+            <span asp-validation-for="Username"></span>
+            <br />
+
+            <input asp-for="Password" placeholder="Password" required/>
+            <span asp-validation-for="Password"></span>
+            <br />
+
+            <input type="submit"  value="Login"/>
+
+        </form>
+    </div>
+    <a asp-controller="Admin" asp-action="AdminIndex">Go To Admin</a>
+</body>
+</html>

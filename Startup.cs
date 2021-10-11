@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LloydStephanieRealty.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace LloydStephanieRealty
 {
@@ -31,6 +32,7 @@ namespace LloydStephanieRealty
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:AlecConnStr"]);
             });
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MBS_DBContext>();
             services.AddScoped<IMailingListRepository, EFMailingListRepository>();
             services.AddScoped<IBlogRepository, EFBlogRepository>();
             services.AddScoped<ICommentRepository, EFCommentRepository>();
@@ -58,6 +60,7 @@ namespace LloydStephanieRealty
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -5,9 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using LloydStephanieRealty.Models;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace LloydStephanieRealty.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private IMailingListRepository mailingListRepository;
@@ -15,13 +18,17 @@ namespace LloydStephanieRealty.Controllers
         private ICommentRepository commentRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository, UserManager<IdentityUser> manager, SignInManager<IdentityUser> signIn)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
             mailingListRepository = mlRepository;
             contentsRepository = contents;
             imageRepository = iRepository;
+            userManager = manager;
+            signInManager = signIn;
         }
 
         public IActionResult AdminIndex()
@@ -253,6 +260,41 @@ namespace LloydStephanieRealty.Controllers
             string newConnectWithUsText = Request.Form["connectWithUs"];
             contentsRepository.EditHomePage(newTalkToUsText, newMeetUsText, newConnectWithUsText);
             return RedirectToAction("WebsiteContentsIndex");
+        }
+
+        public IActionResult ResetAdminPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetAdminPassword(ResetAdminModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.GetUserAsync(User);
+                if(user == null)
+                {
+                    Console.WriteLine("User cannot be found");
+                    return RedirectToPage("/Login");
+                }
+
+                var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+
+                await signInManager.RefreshSignInAsync(user);
+
+                return View("ResetPasswordConfirmation");
+            }
+            return View(model);
         }
     }
 }

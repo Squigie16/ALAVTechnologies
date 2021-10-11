@@ -11,6 +11,7 @@ using MimeKit;
 using MimeKit.Text;
 using MailKit.Security;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity;
 
 namespace LloydStephanieRealty.Controllers
 {
@@ -22,7 +23,8 @@ namespace LloydStephanieRealty.Controllers
         private ICommentRepository commentRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
-        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository)
+        private readonly SignInManager<IdentityUser> signInManager;
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository, SignInManager<IdentityUser> signIn)
         {
             mailingListRepository = userRepository;
             _dbContext = dbContext;
@@ -30,6 +32,7 @@ namespace LloydStephanieRealty.Controllers
             commentRepository = comment;
             contentsRepository = contents;
             imageRepository = iRepository;
+            signInManager = signIn;
         }
         public IActionResult Index()
         {
@@ -149,6 +152,36 @@ namespace LloydStephanieRealty.Controllers
             email.SendConfirmationEmail(emailSubject, emailContents, user.Email);
 
             return RedirectToAction("ContactUs");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+
+            Console.WriteLine("Username: " + model.Username);
+            Console.WriteLine("Password: " + model.Password);
+
+            if (ModelState.IsValid)
+            {
+
+                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("AdminIndex", "Admin");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+               
+            }
+
+            return RedirectToPage("/Login", model);
         }
     }
 }
