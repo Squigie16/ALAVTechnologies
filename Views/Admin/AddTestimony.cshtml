@@ -1,0 +1,25 @@
+﻿@model LloydStephanieRealty.Models.Testimony
+@{
+    Layout = "_AdminLayout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Create new Testimony post</h2>
+
+    <form asp-action="AddTestimony" method="post" enctype="multipart/form-data">
+        <label>Testimony</label>
+        <label for="tTitle" asp-for="Title"></label>
+        <input asp-for="Title" type="text" id="tTitle" required placeholder="The Title goes here..." />
+        <br />
+
+        <label id="tDesc" asp-for="Description"></label>
+        <textarea asp-for="Description" id="tDesc" required placeholder="What would you like to write?"></textarea><br />
+        <input type="submit" value="Post" /><br />
+    </form>
+
+</body>
+
+</html>

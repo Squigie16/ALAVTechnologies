@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LloydStephanieRealty.Migrations
 {
     [DbContext(typeof(MBS_DBContext))]
-    [Migration("20210918042951_AddImagesToBlogMigration2")]
-    partial class AddImagesToBlogMigration2
+    [Migration("20211011054208_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,6 +117,27 @@ namespace LloydStephanieRealty.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("MailingListUsers");
+                });
+
+            modelBuilder.Entity("LloydStephanieRealty.Models.Testimony", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateOfPost")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Testimonies");
                 });
 
             modelBuilder.Entity("LloydStephanieRealty.Models.Comment", b =>

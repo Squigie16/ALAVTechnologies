@@ -16,17 +16,19 @@ namespace LloydStephanieRealty.Controllers
         private IMailingListRepository mailingListRepository;
         private IBlogRepository blogRepository;
         private ICommentRepository commentRepository;
+        private ITestimonyRepository testimonyRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository, UserManager<IdentityUser> manager, SignInManager<IdentityUser> signIn)
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository, UserManager<IdentityUser> manager, SignInManager<IdentityUser> signIn)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
             mailingListRepository = mlRepository;
             contentsRepository = contents;
             imageRepository = iRepository;
+            testimonyRepository = tRepository;
             userManager = manager;
             signInManager = signIn;
         }
@@ -41,6 +43,12 @@ namespace LloydStephanieRealty.Controllers
             IQueryable<Blog> blogs = blogRepository.Blogs;
             return View(blogs);
         }
+        public IActionResult TestimonyIndex()
+        {
+            IQueryable<Testimony> testimonies = testimonyRepository.Testimonies;
+            return View(testimonies);
+        }
+
         public IActionResult WebsiteContentsIndex()
         {
             return View();
@@ -76,6 +84,11 @@ namespace LloydStephanieRealty.Controllers
         }
 
         public IActionResult AddBlog()
+        {
+            return View();
+        }
+
+        public IActionResult AddTestimony()
         {
             return View();
         }
@@ -158,6 +171,46 @@ namespace LloydStephanieRealty.Controllers
             blogRepository.DeleteBlog(BlogID);
             return RedirectToAction("BlogIndex");
         }
+
+        [HttpPost]
+        public IActionResult AddTestimony(Testimony testimony)
+        {
+            testimony.DateOfPost = DateTime.Now;
+            testimonyRepository.AddTestimony(testimony);
+
+            return RedirectToAction("TestimonyIndex");
+        }
+
+        public IActionResult EditTestimony(int id)
+        {
+            Testimony testimony = new Testimony();
+            IQueryable<Testimony> testimonies = testimonyRepository.Testimonies;
+            foreach (Testimony b in testimonies)
+            {
+                if (id == b.ID)
+                {
+                    testimony = b;
+                    break;
+                }
+            }
+            return View(testimony);
+        }
+
+        [HttpPost]
+        public IActionResult EditTestimony(Testimony testimony)
+        {
+            testimony.DateOfPost = DateTime.Now;
+            testimonyRepository.EditTestimony(testimony);
+            return RedirectToAction("TestimonyIndex");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTestimony(int TestimonyID)
+        {
+            testimonyRepository.DeleteTestimony(TestimonyID);
+            return RedirectToAction("TestimonyIndex");
+        }
+
         [HttpPost]
         public IActionResult DeleteComment(int CommentID)
         {

@@ -30,7 +30,7 @@ namespace LloydStephanieRealty
             services.AddControllersWithViews();
             services.AddDbContext<MBS_DBContext>(opts =>
             {
-                opts.UseSqlServer(Configuration["ConnectionStrings:AlecConnStr"]);
+                opts.UseSqlServer(Configuration["ConnectionStrings:MBSConnStr"]);
             });
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MBS_DBContext>();
             services.AddScoped<IMailingListRepository, EFMailingListRepository>();
@@ -38,6 +38,7 @@ namespace LloydStephanieRealty
             services.AddScoped<ICommentRepository, EFCommentRepository>();
             services.AddScoped<IWebsiteContentsRepository, EFWebsiteContentsRepository>();
             services.AddScoped<IImageModelRepository, EFImageModelRepository>();
+            services.AddScoped<ITestimonyRepository, EFTestimonyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
