@@ -1,0 +1,42 @@
+﻿@model LloydStephanieRealty.Models.PropertyListing
+@{
+    Layout = "_AdminLayout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Create new listing</h2>
+
+    <form asp-action="AddListing" method="post" enctype="multipart/form-data">
+        <label>Image</label>
+        <input asp-for="Image.ImageFile" accept="image/*" />
+        <br />
+  
+        <input asp-for="Address" type="text" id="bTitle" required placeholder="Enter Address" />
+        <br />
+        
+        <input asp-for="City" type="text" id="bTitle" required placeholder="Enter City" />
+        <br />
+        
+        <input asp-for="Province" type="text" id="bTitle" required placeholder="Enter Province" />
+        <br />
+        
+        <input asp-for="numOfBedrooms" type="number" id="bTitle" required placeholder="Enter Number of Bedrooms" />
+        <br />
+        
+        <input asp-for="numOfBathrooms" type="number" id="bTitle" required placeholder="Enter Number of Bathrooms" />
+        <br />
+        
+        <input asp-for="linkToFullListing" type="text" id="bTitle" required placeholder="Enter the link to full listing" />
+        <br />
+        
+        <input asp-for="AskingPrice" type="text" id="bTitle" required placeholder="Enter Asking Price" />
+        <br />
+        <input type="submit" value="Post" /><br />
+    </form>
+
+</body>
+
+</html>

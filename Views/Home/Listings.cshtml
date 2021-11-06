@@ -1,0 +1,27 @@
+﻿@model IQueryable<LloydStephanieRealty.Models.PropertyListing>
+@{
+    Layout = "_Layout";
+    
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/ClientBlog.css" />
+</head>
+<body>
+    <h2>Current Listings</h2>
+    <div id="allBlogs">
+        @foreach (var property in Model)
+        {
+            <a id="postLink" href="@property.linkToFullListing">
+                <div id="displayBlog">
+                    <img src="@("~/image/"+property.Image.ImageName)" asp-append-version="true" width="400px" height="225px" />
+                    <h5>Asking Price: @property.AskingPrice</h5>
+                    <h5>@property.Address @property.City, @property.Province</h5>
+                    <p>Number Of Bedrooms: @property.numOfBedrooms Number Of Bathrooms @property.numOfBathrooms</p>
+                </div>
+            </a>
+        }
+    </div>
+</body>
+
+</html>

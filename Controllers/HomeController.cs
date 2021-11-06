@@ -25,7 +25,8 @@ namespace LloydStephanieRealty.Controllers
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
         private readonly SignInManager<IdentityUser> signInManager;
-        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository, SignInManager<IdentityUser> signIn)
+        private IPropertyListingRepository propertyRepository;
+        public HomeController(IMailingListRepository userRepository, MBS_DBContext dbContext, IBlogRepository blog, ICommentRepository comment, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository, SignInManager<IdentityUser> signIn, IPropertyListingRepository listingRepository)
         {
             mailingListRepository = userRepository;
             _dbContext = dbContext;
@@ -35,6 +36,7 @@ namespace LloydStephanieRealty.Controllers
             contentsRepository = contents;
             imageRepository = iRepository;
             signInManager = signIn;
+            propertyRepository = listingRepository;
         }
         public IActionResult Index()
         {
@@ -64,6 +66,22 @@ namespace LloydStephanieRealty.Controllers
                 }
             }
             return View(blogs);
+        }
+        public IActionResult Listings()
+        {
+            IQueryable<PropertyListing> listings = propertyRepository.PropertyListings;
+            IQueryable<ImageModel> allImages = imageRepository.Images;
+            foreach (PropertyListing pl in listings)
+            {
+                foreach (ImageModel i in allImages)
+                {
+                    if (pl.ImageID == i.ImageId)
+                    {
+                        pl.Image = i;
+                    }
+                }
+            }
+            return View(listings);
         }
         public IActionResult ContactUs()
         {

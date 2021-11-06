@@ -17,21 +17,22 @@ namespace LloydStephanieRealty.Migrations
                 table: "Blogs",
                 column: "ImageId");
 
-            migrationBuilder.AddForeignKey(
+            /*migrationBuilder.AddForeignKey(
                 name: "FK_Blogs_Images_ImageId",
                 table: "Blogs",
                 column: "ImageId",
                 principalTable: "Images",
                 principalColumn: "ImageId",
                 onDelete: ReferentialAction.Restrict);
+            */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            /*migrationBuilder.DropForeignKey(
                 name: "FK_Blogs_Images_ImageId",
                 table: "Blogs");
-
+            */
             migrationBuilder.DropIndex(
                 name: "IX_Blogs_ImageId",
                 table: "Blogs");

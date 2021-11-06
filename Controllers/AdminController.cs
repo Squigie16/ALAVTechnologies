@@ -19,9 +19,10 @@ namespace LloydStephanieRealty.Controllers
         private ITestimonyRepository testimonyRepository;
         private IWebsiteContentsRepository contentsRepository;
         private IImageModelRepository imageRepository;
+        private IPropertyListingRepository propertyRepository;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository, UserManager<IdentityUser> manager, SignInManager<IdentityUser> signIn)
+        public AdminController(IBlogRepository bRepository, ICommentRepository cRepository, IMailingListRepository mlRepository, IWebsiteContentsRepository contents, IImageModelRepository iRepository, ITestimonyRepository tRepository, UserManager<IdentityUser> manager, SignInManager<IdentityUser> signIn, IPropertyListingRepository pRepository)
         {
             blogRepository = bRepository;
             commentRepository = cRepository;
@@ -29,6 +30,7 @@ namespace LloydStephanieRealty.Controllers
             contentsRepository = contents;
             imageRepository = iRepository;
             testimonyRepository = tRepository;
+            propertyRepository = pRepository;
             userManager = manager;
             signInManager = signIn;
         }
@@ -42,6 +44,11 @@ namespace LloydStephanieRealty.Controllers
         {
             IQueryable<Blog> blogs = blogRepository.Blogs;
             return View(blogs);
+        }
+        public IActionResult ListingsIndex()
+        {
+            IQueryable<PropertyListing> listings = propertyRepository.PropertyListings;
+            return View(listings);
         }
         public IActionResult TestimonyIndex()
         {
@@ -84,6 +91,10 @@ namespace LloydStephanieRealty.Controllers
         }
 
         public IActionResult AddBlog()
+        {
+            return View();
+        }
+        public IActionResult AddListing()
         {
             return View();
         }
@@ -155,6 +166,28 @@ namespace LloydStephanieRealty.Controllers
             ViewData["Comments"] = commentsOnPost;
             return View(blog);
         }
+        public IActionResult EditListing(int id)
+        {
+            PropertyListing listing = new PropertyListing();
+            foreach (PropertyListing l in propertyRepository.PropertyListings)
+            {
+                if (id == l.ID)
+                {
+                    listing = l;
+                    break;
+                }
+            }
+
+            foreach (ImageModel i in imageRepository.Images)
+            {
+                if (listing.ImageID == i.ImageId)
+                {
+                    listing.Image = i;
+                    break;
+                }
+            }
+            return View(listing);
+        }
 
         [HttpPost]
         public IActionResult EditBlog(Blog blog)
@@ -165,11 +198,26 @@ namespace LloydStephanieRealty.Controllers
         }
 
         [HttpPost]
+        public IActionResult EditListing(PropertyListing listing)
+        {
+            propertyRepository.EditPropertyListing(listing);
+            return RedirectToAction("ListingsIndex");
+        }
+
+        [HttpPost]
         public IActionResult DeleteBlog(int BlogID, int ImageID)
         {
             imageRepository.DeleteImage(ImageID);
             blogRepository.DeleteBlog(BlogID);
             return RedirectToAction("BlogIndex");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteListing(int PropertyID, int ImageID)
+        {
+            imageRepository.DeleteImage(ImageID);
+            propertyRepository.DeletePropertyListing(PropertyID);
+            return RedirectToAction("ListingsIndex");
         }
 
         [HttpPost]
@@ -348,6 +396,17 @@ namespace LloydStephanieRealty.Controllers
                 return View("ResetPasswordConfirmation");
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddListing(PropertyListing property)
+        {
+            ImageModel image = property.Image;
+            int imageID = await imageRepository.AddImageAsync(image);
+            property.ImageID = imageID;
+            propertyRepository.AddPropertyListing(property);
+
+            return RedirectToAction("ListingsIndex");
         }
     }
 }

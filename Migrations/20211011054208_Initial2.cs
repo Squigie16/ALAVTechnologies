@@ -7,13 +7,16 @@ namespace LloydStephanieRealty.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropForeignKey(
                 name: "FK_Blogs_Images_ImageId",
                 table: "Blogs");
+           
 
             migrationBuilder.DropIndex(
                 name: "IX_Blogs_ImageId",
                 table: "Blogs");
+             */
 
             migrationBuilder.RenameColumn(
                 name: "ImageId",

@@ -1,0 +1,48 @@
+﻿@model IQueryable<LloydStephanieRealty.Models.PropertyListing>
+@{
+    Layout = "_AdminLayout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>Manage Listings</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Address</th>
+                <th>City</th>
+                <th>Province</th>
+                <th></th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var listing in Model)
+            {
+            <tr>
+                <td>@listing.Address</td>
+                <td>@listing.City</td>
+                <td>@listing.Province</td>
+                <td>
+                    <a asp-action="EditListing" asp-route-id="@listing.ID">Edit</a>
+                </td>
+                <td>
+                    <form asp-action="DeleteListing" method="post">
+                        <input type="hidden" value="@listing.ID" name="PropertyID" />
+                        <input type="hidden" value="@listing.ImageID" name="ImageID" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <div class="text-center">
+        <a id="addBlog" asp-controller="Admin" asp-action="AddListing">Add a Listing</a>
+    </div>
+</body>
+
+</html>
