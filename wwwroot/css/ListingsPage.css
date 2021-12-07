@@ -18,7 +18,7 @@ input[type=text] {
 
 input[type=submit] {
     width: 100%;
-    background-color: navy;
+    background-color: #A38D31;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -28,27 +28,29 @@ input[type=submit] {
 }
 
     input[type=submit]:hover {
-        background-color: darkturquoise;
+        background-color: #917e2c;
     }
 
 
-    #postLink:hover {
-        text-decoration: none;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+#postLink:hover {
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 #displayBlog {
     display: table-cell;
     flex: 1;
     width: 400px;
+    height: 400px;
     margin: 20px 50px 20px 50px;
     color: navy;
     padding: 10px 10px 10px 10px;
 }
-#displayBlog img{
-    float: left;
-    padding-right: 10px;
-}
+
+    #displayBlog img {
+        float: left;
+        padding-right: 10px;
+    }
 
 
 #allBlogs {
@@ -58,7 +60,7 @@ input[type=submit] {
     align-items: center;
 }
 
-    
+
 
 table {
     border-collapse: collapse;

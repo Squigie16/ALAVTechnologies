@@ -1,5 +1,4 @@
-﻿@page
-@model LloydStephanieRealty.Models.LoginModel
+﻿@model LloydStephanieRealty.Models.LoginModel
 @{
     Layout = null;
 }
@@ -17,6 +16,7 @@
         <form asp-controller="Home" asp-action="Login" method="post">
 
             <div asp-validation-summary="All" />
+            <h3>@Html.ValidationMessage("error")</h3>
 
             <input asp-for="Username" placeholder="Username" required/>
             <span asp-validation-for="Username"></span>
@@ -30,6 +30,5 @@
 
         </form>
     </div>
-    <a asp-controller="Admin" asp-action="AdminIndex">Go To Admin</a>
 </body>
 </html>

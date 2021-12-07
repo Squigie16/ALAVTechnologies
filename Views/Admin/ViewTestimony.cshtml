@@ -1,0 +1,22 @@
+﻿@model LloydStephanieRealty.Models.Testimony
+@{
+    Layout = "_AdminLayout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AdminBlog.css" />
+</head>
+<body>
+    <h2>View Testimony</h2>
+    <br />
+    <h2>@Model.Title</h2>
+    <br />
+    <p>@Model.Description</p>
+
+    <br />
+    <div class="text-center">
+        <a id="addBlog" asp-controller="Admin" asp-action="TestimonyIndex">Go back</a>
+    </div>
+</body>
+
+</html>

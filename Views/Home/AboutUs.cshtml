@@ -2,10 +2,13 @@
 @{
     string AboutUsHeader = ViewData["AboutUsHeader"] as string;
     string AboutUsPara = ViewData["AboutUsPara"] as string;
+    string AboutUsLloyd = ViewData["AboutUsLloyd"] as string;
+    string AboutUsStephanie = ViewData["AboutUsStephanie"] as string;
     Layout = "_Layout";
 }
 <html>
 <head>
+   <link rel="stylesheet" href="~/css/AboutUs.css" />
     
 </head>
 <body>
@@ -13,6 +16,23 @@
     <h2>@AboutUsHeader</h2>
 
     <p>@AboutUsPara</p>
+
+    <div class="GridLayout">
+        <div class="ProfilePic">
+            <img src="~/image/lloyd.png" height="200px" width="200px" />
+        </div>
+        <div class="Info">
+            <h5>Lloyd Oliver</h5>
+            <p>@AboutUsLloyd</p>
+        </div>
+        <div class="ProfilePic">
+            <img src="~/image/stephanie.png" height="200px" width="200px" />
+        </div>
+        <div class="Info">
+            <h5>Stephanie Petroff</h5>
+            <p>@AboutUsStephanie</p>
+        </div>
+    </div>
 
 </body>
 

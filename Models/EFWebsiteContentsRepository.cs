@@ -15,10 +15,12 @@ namespace LloydStephanieRealty.Models
         }
         public WebsiteContents Content => context.websiteContents;
 
-        public void EditAboutUsContents(string header, string content)
+        public void EditAboutUsContents(string header, string content, string lloyd, string stephanie)
         {
             Content.AboutUsHeader = header;
             Content.AboutUsParagraph = content;
+            Content.AboutUsLloyd = lloyd;
+            Content.AboutUsStephanie = stephanie;
         }
 
         public void EditCompanyDetails(string phoneNumber, string email, string address)

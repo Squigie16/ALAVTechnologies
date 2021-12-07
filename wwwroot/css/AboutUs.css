@@ -1,0 +1,14 @@
+﻿.GridLayout{
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 100px;
+    grid-row-gap: 50px;
+}
+.ProfilePic {
+    background-color: rgba(84, 217, 222, 1);
+    border-radius: 50%;
+}
+
+img {
+    border-radius: 50%;
+}

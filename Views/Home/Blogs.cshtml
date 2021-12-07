@@ -15,7 +15,7 @@
         {
             <a id="postLink" asp-controller="Home" asp-action="Blog" asp-route-id="@blog.ID">
                 <div id="displayBlog">
-                    <img src="@("~/image/"+blog.Image.ImageName)" asp-append-version="true" width="400px" height="225px"  />
+                    <img src="@("~/image/"+blog.Image.ImageName)" asp-append-version="true" width="200px" height="200px"  />
                     <h5>@blog.Title</h5>
                     @{ 
                         index = 0;

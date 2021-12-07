@@ -65,6 +65,8 @@ namespace LloydStephanieRealty.Controllers
         {
             ViewData["AboutUsHeader"] = contentsRepository.Content.AboutUsHeader;
             ViewData["AboutUsPara"] = contentsRepository.Content.AboutUsParagraph;
+            ViewData["AboutUsLloyd"] = contentsRepository.Content.AboutUsLloyd;
+            ViewData["AboutUsStephanie"] = contentsRepository.Content.AboutUsStephanie;
             return View();
         }
 
@@ -122,13 +124,17 @@ namespace LloydStephanieRealty.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBlog(Blog blog)
         {
-            ImageModel image = blog.Image;
-            int imageID = await imageRepository.AddImageAsync(image);
-            blog.DateOfPost = DateTime.Now;
-            blog.ImageID = imageID;
-            blogRepository.AddBlog(blog);
+            if (ModelState.IsValid)
+            {
+                ImageModel image = blog.Image;
+                int imageID = await imageRepository.AddImageAsync(image);
+                blog.DateOfPost = DateTime.Now;
+                blog.ImageID = imageID;
+                blogRepository.AddBlog(blog);
 
-            return RedirectToAction("BlogIndex");
+                return RedirectToAction("BlogIndex");
+            }
+            return View();
         }
 
         public IActionResult EditBlog(int id)
@@ -229,7 +235,7 @@ namespace LloydStephanieRealty.Controllers
             return RedirectToAction("TestimonyIndex");
         }
 
-        public IActionResult EditTestimony(int id)
+        public IActionResult ViewTestimony(int id)
         {
             Testimony testimony = new Testimony();
             IQueryable<Testimony> testimonies = testimonyRepository.Testimonies;
@@ -242,14 +248,6 @@ namespace LloydStephanieRealty.Controllers
                 }
             }
             return View(testimony);
-        }
-
-        [HttpPost]
-        public IActionResult EditTestimony(Testimony testimony)
-        {
-            testimony.DateOfPost = DateTime.Now;
-            testimonyRepository.EditTestimony(testimony);
-            return RedirectToAction("TestimonyIndex");
         }
 
         [HttpPost]
@@ -339,7 +337,9 @@ namespace LloydStephanieRealty.Controllers
         {
             string newHeader = Request.Form["header"];
             string newPara = Request.Form["paragraph"];
-            contentsRepository.EditAboutUsContents(newHeader, newPara);
+            string newLloydDesc = Request.Form["lloyd"];
+            string newStephanieDesc = Request.Form["stephanie"];
+            contentsRepository.EditAboutUsContents(newHeader, newPara, newLloydDesc, newStephanieDesc);
             return RedirectToAction("WebsiteContentsIndex");
         }
 
@@ -401,12 +401,16 @@ namespace LloydStephanieRealty.Controllers
         [HttpPost]
         public async Task<IActionResult> AddListing(PropertyListing property)
         {
-            ImageModel image = property.Image;
-            int imageID = await imageRepository.AddImageAsync(image);
-            property.ImageID = imageID;
-            propertyRepository.AddPropertyListing(property);
+            if (ModelState.IsValid)
+            {
+                ImageModel image = property.Image;
+                int imageID = await imageRepository.AddImageAsync(image);
+                property.ImageID = imageID;
+                propertyRepository.AddPropertyListing(property);
 
-            return RedirectToAction("ListingsIndex");
+                return RedirectToAction("ListingsIndex");
+            }
+            return View();
         }
     }
 }

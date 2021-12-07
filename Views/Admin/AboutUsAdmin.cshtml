@@ -2,6 +2,8 @@
     Layout = "_AdminLayout";
     string aboutUsHeader = ViewData["AboutUsHeader"] as string;
     string aboutUsPara = ViewData["AboutUsPara"] as string;
+    string aboutUsLloyd = ViewData["AboutUsLloyd"] as string;
+    string aboutUsStephanie = ViewData["AboutUsStephanie"] as string;
 }
 <html>
 <head>
@@ -17,7 +19,13 @@
 
         <label>Paragraph</label>
         <textarea name="paragraph" required>@aboutUsPara</textarea><br />
-        <input type="submit" value="Save Changes" /><br /> 
+
+        <label>Description for Lloyd</label>
+        <textarea name="lloyd" required>@aboutUsLloyd</textarea><br />
+
+        <label>Description for Stephanie</label>
+        <textarea name="stephanie" required>@aboutUsStephanie</textarea><br />
+        <input type="submit" value="Save Changes" /><br />
     </form>
     <br />
 

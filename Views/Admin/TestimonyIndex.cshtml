@@ -13,7 +13,7 @@
             <tr>
                 <th>Testimony Title</th>
                 <th>Time Created</th>
-                <th>Edit</th>
+                <th>View</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -24,7 +24,7 @@
                     <td>@testimony.Title</td>
                     <td>@testimony.DateOfPost</td>
                     <td>
-                        <a asp-action="EditTestimony" asp-route-id="@testimony.ID">Edit</a>
+                        <a asp-action="ViewTestimony" asp-route-id="@testimony.ID">View</a>
                     </td>
                     <td>
                         <form asp-action="DeleteTestimony" method="post">
@@ -37,9 +37,6 @@
         </tbody>
     </table>
     <br />
-    <div class="text-center">
-        <a id="addTestimony" asp-controller="Admin" asp-action="AddTestimony">Add a Testimony</a>
-    </div>
 </body>
 
 </html>

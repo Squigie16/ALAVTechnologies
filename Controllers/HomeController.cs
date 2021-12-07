@@ -95,6 +95,8 @@ namespace LloydStephanieRealty.Controllers
         {
             ViewData["AboutUsHeader"] = contentsRepository.Content.AboutUsHeader;
             ViewData["AboutUsPara"] = contentsRepository.Content.AboutUsParagraph;
+            ViewData["AboutUsLloyd"] = contentsRepository.Content.AboutUsLloyd;
+            ViewData["AboutUsStephanie"] = contentsRepository.Content.AboutUsStephanie;
             return View();
         }
 
@@ -174,7 +176,6 @@ namespace LloydStephanieRealty.Controllers
             return RedirectToAction("ContactUs");
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
             return View();
@@ -197,11 +198,25 @@ namespace LloydStephanieRealty.Controllers
                     return RedirectToAction("AdminIndex", "Admin");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-               
+                ModelState.AddModelError("error", "Invalid Login Attempt");
+                
             }
 
-            return RedirectToPage("/Login", model);
+            return View();
+        }
+
+        public IActionResult AddTestimony()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddTestimony(Testimony testimony)
+        {
+            testimony.DateOfPost = DateTime.Now;
+            testimonyRepository.AddTestimony(testimony);
+
+            return RedirectToAction("TestimonyIndex");
         }
     }
 }
