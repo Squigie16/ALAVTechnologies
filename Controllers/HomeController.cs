@@ -53,8 +53,8 @@ namespace LloydStephanieRealty.Controllers
     
         public IActionResult Blogs()
         {
-            IQueryable<Blog> blogs = blogRepository.Blogs;
-            IQueryable<ImageModel> allImages = imageRepository.Images;
+            List<Blog> blogs = blogRepository.Blogs.ToList();
+            List<ImageModel> allImages = imageRepository.Images.ToList();
             foreach(Blog b in blogs)
             {
                 foreach(ImageModel i in allImages)
@@ -69,8 +69,8 @@ namespace LloydStephanieRealty.Controllers
         }
         public IActionResult Listings()
         {
-            IQueryable<PropertyListing> listings = propertyRepository.PropertyListings;
-            IQueryable<ImageModel> allImages = imageRepository.Images;
+            List<PropertyListing> listings = propertyRepository.PropertyListings.ToList();
+            List<ImageModel> allImages = imageRepository.Images.ToList();
             foreach (PropertyListing pl in listings)
             {
                 foreach (ImageModel i in allImages)
@@ -103,7 +103,7 @@ namespace LloydStephanieRealty.Controllers
         public IActionResult Blog(int id)
         {
             Blog blog = new Blog();
-            IQueryable<Blog> blogs = blogRepository.Blogs;
+            List<Blog> blogs = blogRepository.Blogs.ToList();
             foreach (Blog b in blogs)
             {
                 if (id == b.ID)
@@ -115,7 +115,7 @@ namespace LloydStephanieRealty.Controllers
 
             List<Comment> commentsOnPost = new List<Comment>();
 
-            foreach (Comment c in commentRepository.Comments)
+            foreach (Comment c in commentRepository.Comments.ToList())
             {
                 if(c.BlogID == blog.ID)
                 {
@@ -125,7 +125,7 @@ namespace LloydStephanieRealty.Controllers
 
             ImageModel image = new ImageModel();
 
-            foreach (ImageModel i in imageRepository.Images)
+            foreach (ImageModel i in imageRepository.Images.ToList())
             {
                 if(blog.ImageID == i.ImageId)
                 {
@@ -143,14 +143,13 @@ namespace LloydStephanieRealty.Controllers
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {
-            IQueryable<Blog> blogs = blogRepository.Blogs;
+            List<Blog> blogs = blogRepository.Blogs.ToList();
             Blog blog = new Blog();
 
             foreach(Blog b in blogs)
             {
                 if(comment.BlogID == b.ID)
                 {
-                    //b.Comments.Add(comment);
                     blog = b;
                     break;
                 }
@@ -216,7 +215,7 @@ namespace LloydStephanieRealty.Controllers
             testimony.DateOfPost = DateTime.Now;
             testimonyRepository.AddTestimony(testimony);
 
-            return RedirectToAction("TestimonyIndex");
+            return RedirectToAction("ContactUs");
         }
     }
 }

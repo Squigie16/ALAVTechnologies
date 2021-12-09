@@ -11,7 +11,7 @@
 
     <form asp-action="AddListing" method="post" enctype="multipart/form-data">
         <label>Image</label>
-        <input asp-for="Image.ImageFile" accept="image/*" />
+        <input asp-for="Image.ImageFile" accept="image/*" required/>
         <br />
   
         <input asp-for="Address" type="text" id="bTitle" required placeholder="Enter Address" />

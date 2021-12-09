@@ -11,13 +11,13 @@ namespace LloydStephanieRealty.Models
 {
     public class EmailToCustomer
     {
-        private string FromEmailAddress = "alavtechnoreply@gmail.com";
-        private string FromEmailAddressPassword = "AlavTech123!";
+        private string FromEmailAddress = "alavtech@outlook.com";
+        private string FromEmailAddressPassword = "CapstoneProj!";
         
         public void SendEmailToGroup(string subject, string contents, IQueryable<MailingListUser> mailingListUsers)
         {
             using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            smtp.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
             smtp.Authenticate(FromEmailAddress, FromEmailAddressPassword);
             foreach(MailingListUser mlUser in mailingListUsers)
             {
@@ -40,7 +40,7 @@ namespace LloydStephanieRealty.Models
             email.Body = new TextPart(TextFormat.Html) { Text = contents };
 
             using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            smtp.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
             smtp.Authenticate(FromEmailAddress, FromEmailAddressPassword);
             smtp.Send(email);
             smtp.Disconnect(true);

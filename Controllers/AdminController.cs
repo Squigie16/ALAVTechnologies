@@ -365,22 +365,27 @@ namespace LloydStephanieRealty.Controllers
 
         public IActionResult ResetAdminPassword()
         {
+            Console.WriteLine("view loaded");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> ResetAdminPassword(ResetAdminModel model)
         {
+
             if (ModelState.IsValid)
             {
+                Console.WriteLine("passed model state");
                 var user = await userManager.GetUserAsync(User);
-                if(user == null)
+                Console.WriteLine("passed get user async");
+                if (user == null)
                 {
                     Console.WriteLine("User cannot be found");
                     return RedirectToPage("/Login");
                 }
 
                 var result = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                Console.WriteLine("passed change password async");
 
                 if (!result.Succeeded)
                 {
@@ -392,9 +397,10 @@ namespace LloydStephanieRealty.Controllers
                 }
 
                 await signInManager.RefreshSignInAsync(user);
-
+                Console.WriteLine("should return confirmation");
                 return View("ResetPasswordConfirmation");
             }
+            Console.WriteLine("return view back");
             return View(model);
         }
 

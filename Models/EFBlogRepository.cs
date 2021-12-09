@@ -52,6 +52,7 @@ namespace LloydStephanieRealty.Models
             context.Blogs.Remove(blog);
 
             context.SaveChanges();
+
         }
     }
 }
